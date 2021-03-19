@@ -16,13 +16,6 @@ class _ListOfItemState extends State<ListOfItem> {
     final user = Provider.of<User>(context);
 
     final menu = Provider.of<List<Menu>>(context) ?? [];
-    // menu.forEach((menu) {
-    //   print(menu.id);
-    //   // print(menu.caticury);
-    //   // print(menu.price);
-    //   // print(menu.unit);
-    // });
-    //print(user.uid);
     return ListView.builder(
       itemCount: menu.length,
       itemBuilder: (context, index) {

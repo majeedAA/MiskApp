@@ -109,7 +109,7 @@ class _ItemListState extends State<ItemList> {
                           padding: new EdgeInsets.only(top: _height / 20),
                           child: new Column(
                             children: <Widget>[
-                              infoChild(_width, Icons.email, city ?? ''),
+                              infoChild(_width, Icons.email, email ?? ''),
                               SizedBox(
                                 height: 10,
                               ),
@@ -118,7 +118,7 @@ class _ItemListState extends State<ItemList> {
                                 height: 10,
                               ),
                               infoChild(
-                                  _width, Icons.location_city, email ?? ''),
+                                  _width, Icons.location_city, city ?? ''),
                               SizedBox(
                                 height: 10,
                               ),

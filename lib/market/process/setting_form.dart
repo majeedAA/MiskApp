@@ -12,6 +12,17 @@ class SettingsForm extends StatefulWidget {
 
 class _SettingsFormState extends State<SettingsForm> {
   final _formKey = GlobalKey<FormState>();
+  final List<String> cities = [
+    'Riyadh',
+    'Jiddah',
+    'Mecca',
+    'Buraydah',
+    'Al-Khubar',
+    'Al-Dammam',
+    'Medina',
+    'Najran',
+    'Tabuk'
+  ];
 
   // form values
   String _currentName;
@@ -59,15 +70,18 @@ class _SettingsFormState extends State<SettingsForm> {
                     }),
                   ),
                   SizedBox(height: 10.0),
-                  TextFormField(
-                    validator: (val) => val.isEmpty ? 'Enter City' : null,
-                    initialValue: userData.sity,
+                  DropdownButtonFormField(
+                    value: _currentCity ?? 'Riyadh',
                     decoration: InputDecoration(
                       labelText: 'City',
                     ),
-                    onChanged: (val) => setState(() {
-                      _currentCity = val;
-                    }),
+                    items: cities.map((city) {
+                      return DropdownMenuItem(
+                        value: city,
+                        child: Text(city),
+                      );
+                    }).toList(),
+                    onChanged: (val) => setState(() => _currentCity = val),
                   ),
                   SizedBox(height: 10.0),
                   TextFormField(
@@ -96,9 +110,9 @@ class _SettingsFormState extends State<SettingsForm> {
                       onPressed: () async {
                         if (_formKey.currentState.validate()) {
                           await DatabaseService(uid: user.uid).updateUserData(
-                              _currentEmail ?? snapshot.data.email,
-                              _currentName ?? snapshot.data.name,
                               _currentCity ?? snapshot.data.sity,
+                              _currentName ?? snapshot.data.name,
+                              _currentEmail ?? snapshot.data.email,
                               _currentPhone ?? snapshot.data.phone,
                               snapshot.data.isCustomer,
                               snapshot.data.isMarket,

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:miskapp/customer/Orders.dart';
-import 'package:miskapp/customer/account.dart';
 import 'package:miskapp/customer/homepageCustomer.dart';
 import 'package:miskapp/customer/notif.dart';
+import 'package:miskapp/market/accountMarket.dart';
 
 class HomePageOfCustomer extends StatefulWidget {
   @override
@@ -13,7 +13,7 @@ class _HomePageOfCustomerState extends State<HomePageOfCustomer> {
   int _curruntIndex = 3;
 
   List<Widget> _widgetOption = <Widget>[
-    Account(),
+    AccountMarket(),
     TheNotification(),
     Order(),
     Login(),

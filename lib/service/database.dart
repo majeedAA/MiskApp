@@ -74,6 +74,10 @@ class DatabaseService {
     return menuCollection.snapshots().map(_menuListFromSnapshot);
   }
 
+  Stream<List<Item>> get items {
+    return userCollection.snapshots().map(_itemListFromSnapshot);
+  }
+
   // get market stream
   Stream<QuerySnapshot> get info {
     return userCollection.snapshots();

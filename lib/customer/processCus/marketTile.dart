@@ -1,14 +1,11 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:miskapp/module/item.dart';
-import 'package:miskapp/module/menu.dart';
 import 'package:miskapp/module/user.dart';
 import 'package:provider/provider.dart';
 
-class MenuTile extends StatelessWidget {
-  final Menu menu;
-  MenuTile({this.menu});
-
+class MarketTile extends StatelessWidget {
+  final Item market;
+  MarketTile({this.market});
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -20,8 +17,8 @@ class MenuTile extends StatelessWidget {
             radius: 25.0,
             backgroundColor: Colors.brown[100],
           ),
-          title: Text(menu.name),
-          subtitle: Text('Takes ${menu.price} Price'),
+          title: Text(market.name),
+          subtitle: Text('Takes ${market.phone} Phone'),
         ),
       ),
     );

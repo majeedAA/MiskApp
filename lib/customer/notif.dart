@@ -23,7 +23,6 @@ class TheNotification extends StatelessWidget {
           ),
         ],
       ),
-      //  bottomNavigationBar: new Boutton()
     );
   }
 }
