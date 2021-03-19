@@ -9,14 +9,23 @@ class DatabaseService {
 
   // collection reference
   final CollectionReference userCollection =
-      Firestore.instance.collection('market');
+      Firestore.instance.collection('users');
 
   final CollectionReference menuCollection =
       Firestore.instance.collection('menu');
 
-  Future<void> updateUserData(String sity, String name, String email, int phone,
-      bool isCustomer, bool isMarket, bool isDriver, bool isAdmin) async {
+  Future<void> updateUserData(
+      String id,
+      String sity,
+      String name,
+      String email,
+      int phone,
+      bool isCustomer,
+      bool isMarket,
+      bool isDriver,
+      bool isAdmin) async {
     return await userCollection.document(uid).setData({
+      'id': id,
       'sity': sity,
       'name': name,
       'email': email,
@@ -57,6 +66,7 @@ class DatabaseService {
     return snapshot.documents.map((doc) {
       //print(doc.data);
       return Item(
+        id: doc.data['id'] ?? '',
         name: doc.data['name'] ?? '',
         email: doc.data['email'] ?? '',
         phone: doc.data['phone'] ?? 0,

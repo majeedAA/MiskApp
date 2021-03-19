@@ -26,6 +26,17 @@ class _RegesterState extends State<Regester> {
   String email = '';
   String pass = '';
   String sity = '';
+  final List<String> cities = [
+    'Riyadh',
+    'Jiddah',
+    'Mecca',
+    'Buraydah',
+    'Al-Khubar',
+    'Al-Dammam',
+    'Medina',
+    'Najran',
+    'Tabuk'
+  ];
   bool isCustomer = true;
   bool isMaatket = false;
   bool isDriver = false;
@@ -68,22 +79,21 @@ class _RegesterState extends State<Regester> {
                       ),
                     ),
                   ),
-                  Container(
-                    margin:
-                        EdgeInsets.symmetric(horizontal: 7.0, vertical: 7.0),
-                    child: TextFormField(
-                      validator: (val) =>
-                          val.isEmpty ? 'Enter correct an City' : null,
-                      onChanged: (val) {
-                        setState(() => sity = val);
-                      },
-                      obscureText: false,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        labelText: 'City',
-                      ),
+                  SizedBox(height: 10.0),
+                  DropdownButtonFormField(
+                    value: 'Riyadh',
+                    decoration: InputDecoration(
+                      labelText: 'City',
                     ),
+                    items: cities.map((city) {
+                      return DropdownMenuItem(
+                        value: city,
+                        child: Text(city),
+                      );
+                    }).toList(),
+                    onChanged: (val) => setState(() => sity = val),
                   ),
+                  SizedBox(height: 10.0),
                   Container(
                     margin:
                         EdgeInsets.symmetric(horizontal: 7.0, vertical: 7.0),
@@ -224,6 +234,7 @@ class _RegesterState extends State<Regester> {
                                   setState(() => loading = true);
                                   dynamic result =
                                       await _auth.registerWithEmailAndPassword(
+                                          '',
                                           email,
                                           pass,
                                           sity,
