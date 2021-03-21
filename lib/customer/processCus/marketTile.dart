@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:miskapp/customer/processCus/items_market.dart';
 import 'package:miskapp/market/homePageMarket.dart';
 import 'package:miskapp/module/item.dart';
 import 'package:miskapp/module/user.dart';
@@ -11,7 +12,15 @@ class MarketTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () async {},
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (BuildContext context) => ItemOfMarket(
+                    idMarket: market.id,
+                  )),
+        );
+      },
       child: Padding(
         padding: const EdgeInsets.only(top: 8.0),
         child: Card(
@@ -22,7 +31,7 @@ class MarketTile extends StatelessWidget {
               backgroundColor: Colors.greenAccent[100],
             ),
             title: Text(market.name),
-            subtitle: Text('Takes ${market.phone} Phone'),
+            //subtitle: Text('Takes ${market.phone} Phone'),
           ),
         ),
       ),

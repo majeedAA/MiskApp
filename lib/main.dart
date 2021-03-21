@@ -16,6 +16,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    final AuthService _auth = AuthService();
     return StreamProvider<User>.value(
       value: AuthService().user,
       child: MaterialApp(
@@ -24,3 +25,17 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+// Container(
+//           child: FlatButton.icon(
+//             icon: Icon(Icons.person),
+//             label: Text('logout',
+//                 style: new TextStyle(
+//                     fontSize: 12.0,
+//                     color: Colors.white,
+//                     fontWeight: FontWeight.bold)),
+//             onPressed: () async {
+//               await _auth.signOut();
+//             },
+//           ),
+//         ),

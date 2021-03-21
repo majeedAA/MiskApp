@@ -25,7 +25,7 @@ class DatabaseService {
       bool isDriver,
       bool isAdmin) async {
     return await userCollection.document(uid).setData({
-      'id': id,
+      'idUser': id,
       'sity': sity,
       'name': name,
       'email': email,
@@ -40,7 +40,7 @@ class DatabaseService {
   Future<void> updatemenuData(String id, String name, String unit, double price,
       String caticury) async {
     return await menuCollection.document().setData({
-      'id': id,
+      'idMarket': id,
       'name': name,
       'unit': unit,
       'price': price,
@@ -52,7 +52,7 @@ class DatabaseService {
     return snapshot.documents.map((doc) {
       //print(doc.data);
       return Menu(
-        id: doc.data['id'] ?? '',
+        id: doc.data['idMarket'] ?? '',
         name: doc.data['name'] ?? '',
         unit: doc.data['unit'] ?? '',
         price: doc.data['price'] ?? 0.0,
@@ -66,7 +66,7 @@ class DatabaseService {
     return snapshot.documents.map((doc) {
       //print(doc.data);
       return Item(
-        id: doc.data['id'] ?? '',
+        id: doc.data['idUser'] ?? '',
         name: doc.data['name'] ?? '',
         email: doc.data['email'] ?? '',
         phone: doc.data['phone'] ?? 0,
@@ -97,6 +97,7 @@ class DatabaseService {
   UserData _userDataFromSnapshot(DocumentSnapshot snapshot) {
     return UserData(
       uid: uid,
+      id: snapshot.data['id'],
       name: snapshot.data['name'],
       phone: snapshot.data['phone'],
       email: snapshot.data['email'],

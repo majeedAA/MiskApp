@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/services.dart';
 import 'package:miskapp/module/user.dart';
 import 'package:miskapp/service/database.dart';
 
@@ -28,7 +29,7 @@ class AuthService {
       AuthResult result = await _auth.signInAnonymously();
       FirebaseUser user = result.user;
       return _userFromFirebaseUser(user);
-    } catch (e) {
+    } on PlatformException catch (e) {
       print(e.toString());
       return null;
     }
@@ -41,7 +42,7 @@ class AuthService {
           email: email.trim(), password: password);
       FirebaseUser user = result.user;
       return user;
-    } catch (error) {
+    } on PlatformException catch (error) {
       print(error.toString());
       return null;
     }
@@ -50,7 +51,6 @@ class AuthService {
   // register with email and password
 
   Future registerWithEmailAndPassword(
-      String id,
       String email,
       String password,
       String city,
@@ -66,10 +66,10 @@ class AuthService {
       FirebaseUser user = result.user;
 
       // create a new document for the user with the uid
-      await DatabaseService(uid: user.uid).updateUserData(id, city, name, email,
-          phone, isCustomer, isMarket, isDriver, isAdmin);
+      await DatabaseService(uid: user.uid).updateUserData(user.uid, city, name,
+          email, phone, isCustomer, isMarket, isDriver, isAdmin);
       return _userFromFirebaseUser(user);
-    } catch (e) {
+    } on PlatformException catch (e) {
       print(e.toString());
       return null;
     }

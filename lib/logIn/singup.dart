@@ -25,7 +25,7 @@ class _RegesterState extends State<Regester> {
   String name = '';
   String email = '';
   String pass = '';
-  String sity = '';
+  String sity;
   final List<String> cities = [
     'Riyadh',
     'Jiddah',
@@ -234,10 +234,9 @@ class _RegesterState extends State<Regester> {
                                   setState(() => loading = true);
                                   dynamic result =
                                       await _auth.registerWithEmailAndPassword(
-                                          '',
                                           email,
                                           pass,
-                                          sity,
+                                          sity ?? 'Riyadh',
                                           name,
                                           phone,
                                           isCustomer,

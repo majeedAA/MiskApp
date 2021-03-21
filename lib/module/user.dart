@@ -6,6 +6,7 @@ class User {
 }
 
 class UserData {
+  final String id;
   final String uid;
   final String name;
   final String sity;
@@ -17,7 +18,8 @@ class UserData {
   final bool isAdmin;
 
   UserData(
-      {this.uid,
+      {this.id,
+      this.uid,
       this.name,
       this.sity,
       this.email,
