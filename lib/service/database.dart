@@ -1,6 +1,9 @@
+// import 'dart:html';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:miskapp/module/item.dart';
 import 'package:miskapp/module/menu.dart';
+import 'package:miskapp/module/card.dart';
 import 'package:miskapp/module/user.dart';
 
 class DatabaseService {
@@ -14,16 +17,20 @@ class DatabaseService {
   final CollectionReference menuCollection =
       Firestore.instance.collection('menu');
 
+  final CollectionReference cardCollection =
+      Firestore.instance.collection('card');
+
   Future<void> updateUserData(
-      String id,
-      String sity,
-      String name,
-      String email,
-      int phone,
-      bool isCustomer,
-      bool isMarket,
-      bool isDriver,
-      bool isAdmin) async {
+    String id,
+    String sity,
+    String name,
+    String email,
+    int phone,
+    bool isCustomer,
+    bool isMarket,
+    bool isDriver,
+    bool isAdmin,
+  ) async {
     return await userCollection.document(uid).setData({
       'idUser': id,
       'sity': sity,
@@ -34,6 +41,15 @@ class DatabaseService {
       'isMarket': isMarket,
       'isDriver': isDriver,
       'isAdmin': isAdmin,
+      'image': ''
+    });
+  }
+
+  Future<void> updateImageUserData(
+    String image,
+  ) async {
+    return await userCollection.document(uid).updateData({
+      'image': image,
     });
   }
 
@@ -45,6 +61,32 @@ class DatabaseService {
       'unit': unit,
       'price': price,
       'caticury': caticury,
+      'image': ''
+    });
+  }
+
+  Future<void> updatemenuImage(String image, String id) async {
+    return await menuCollection.document(id).updateData({'image': image});
+  }
+
+//new
+  Future<void> updatCardData(
+      String idCustomer,
+      String idMarket,
+      String idDriver,
+      String nameOfItem,
+      double totalprice,
+      double price,
+      int quantity) async {
+    return await cardCollection.document().setData({
+      'idCustomer': idCustomer,
+      'nameOfItem': nameOfItem,
+      'idMarket': idMarket,
+      'idDriver': idDriver,
+      'nameOfItem': nameOfItem,
+      'totalprice': totalprice,
+      'price': price,
+      'quantity': quantity,
     });
   }
 
@@ -57,6 +99,24 @@ class DatabaseService {
         unit: doc.data['unit'] ?? '',
         price: doc.data['price'] ?? 0.0,
         caticury: doc.data['caticury'] ?? '',
+        image: doc.data['image'] ?? '',
+        idItem: doc.documentID,
+      );
+    }).toList();
+  }
+
+  //new
+  List<Cardd> _cardListFromSnapshot(QuerySnapshot snapshot) {
+    return snapshot.documents.map((doc) {
+      //print(doc.data);
+      return Cardd(
+        idCustomer: doc.data['idCustomer'] ?? '',
+        idMarket: doc.data['idMarket'] ?? '',
+        idDriver: doc.data['idDriver'] ?? '',
+        nameOfItem: doc.data['nameOfItem'] ?? '',
+        quantity: doc.data['quantity'] ?? 0,
+        price: doc.data['price'] ?? 0,
+        totalprice: doc.data['totalprice'] ?? 0,
       );
     }).toList();
   }
@@ -75,13 +135,19 @@ class DatabaseService {
         isMarket: doc.data['isMarket'] ?? false,
         isDriver: doc.data['isDriver'] ?? false,
         isAdmin: doc.data['isAdmin'] ?? false,
+        image: doc.data['image'] ?? '',
       );
     }).toList();
   }
 
-  // get brews stream
+  // get  stream
   Stream<List<Menu>> get menus {
     return menuCollection.snapshots().map(_menuListFromSnapshot);
+  }
+
+// new
+  Stream<List<Cardd>> get cards {
+    return cardCollection.snapshots().map(_cardListFromSnapshot);
   }
 
   Stream<List<Item>> get items {
@@ -91,6 +157,12 @@ class DatabaseService {
   // get market stream
   Stream<QuerySnapshot> get info {
     return userCollection.snapshots();
+  }
+
+//new
+  // get market stream
+  Stream<QuerySnapshot> get card {
+    return cardCollection.snapshots();
   }
 
   // user data from snapshots
@@ -106,6 +178,19 @@ class DatabaseService {
       isMarket: snapshot.data['isMarket'],
       isDriver: snapshot.data['isDriver'],
       isAdmin: snapshot.data['isAdmin'],
+      image: snapshot.data['image'],
+    );
+  }
+
+//new
+  CardData _cardDataFromSnapshot(DocumentSnapshot snapshot) {
+    return CardData(
+      idCustomer: snapshot.data['idCustomer'],
+      idMarket: snapshot.data['idMarket'],
+      idDriver: snapshot.data['idDriver'],
+      nameOfItem: snapshot.data['nameOfItem'],
+      quantity: snapshot.data['quantity'],
+      price: snapshot.data['price'],
     );
   }
 
@@ -126,5 +211,10 @@ class DatabaseService {
 
   Stream<MenuData> get menuData {
     return menuCollection.document(uid).snapshots().map(_menuDataFromSnapshot);
+  }
+
+  // new
+  Stream<CardData> get cardData {
+    return cardCollection.document(uid).snapshots().map(_cardDataFromSnapshot);
   }
 }

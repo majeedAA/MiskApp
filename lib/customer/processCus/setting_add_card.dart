@@ -34,6 +34,7 @@ class _SittingAddToCardState extends State<SittingAddToCard> {
   final String itemCatigory;
   final String itemUnit;
   final double itemPrice;
+
   _SittingAddToCardState(
       {this.marketId,
       this.itemName,
@@ -44,8 +45,9 @@ class _SittingAddToCardState extends State<SittingAddToCard> {
   @override
   final _formKey = GlobalKey<FormState>();
   int _count = 1;
-  double _totalPrice = 0;
+  double _totalPrice;
   Widget build(BuildContext context) {
+    final user = Provider.of<User>(context);
     return Form(
       key: _formKey,
       child: Column(
@@ -146,13 +148,27 @@ class _SittingAddToCardState extends State<SittingAddToCard> {
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 10, vertical: 25),
                   child: new FloatingActionButton(
-                    backgroundColor: Color(0xff515c5e),
-                    child: Text("Add"),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                    onPressed: () {},
-                  ),
+                      backgroundColor: Color(0xff515c5e),
+                      child: Text("Add"),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      onPressed: () async {
+                        if (_formKey.currentState.validate()) {
+                          await DatabaseService(uid: user.uid).updatCardData(
+                            user.uid ?? '',
+                            marketId ?? '',
+                            '' ?? '',
+                            itemName ?? '',
+                            _totalPrice ?? itemPrice,
+                            itemPrice ?? 0,
+                            _count ?? 0,
+                          );
+                          Navigator.pop(context);
+                        } else {
+                          return Loading();
+                        }
+                      }),
                 ),
               ),
             ],

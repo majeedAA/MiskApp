@@ -4,6 +4,15 @@ class Menu {
   final String unit;
   final String caticury;
   final double price;
+  final String image;
+  final String idItem;
 
-  Menu({this.name, this.caticury, this.unit, this.id, this.price});
+  Menu(
+      {this.name,
+      this.caticury,
+      this.unit,
+      this.id,
+      this.price,
+      this.image,
+      this.idItem});
 }
