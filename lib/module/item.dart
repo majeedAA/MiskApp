@@ -8,6 +8,7 @@ class Item {
   final bool isMarket;
   final bool isDriver;
   final bool isAdmin;
+  final bool isActive;
   final String image;
 
   Item(
@@ -20,5 +21,6 @@ class Item {
       this.isMarket,
       this.isDriver,
       this.isAdmin,
+      this.isActive,
       this.image});
 }

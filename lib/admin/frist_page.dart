@@ -1,22 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:miskapp/customer/Orders.dart';
-import 'package:miskapp/customer/cart/cart_customer.dart';
-import 'package:miskapp/customer/homepageCustomer.dart';
+import 'package:miskapp/admin/account.dart';
+import 'package:miskapp/admin/driverPage.dart';
+import 'package:miskapp/admin/homePage_admin.dart';
+import 'package:miskapp/admin/marketPage.dart';
 import 'package:miskapp/market/accountMarket.dart';
 
-class HomePageOfCustomer extends StatefulWidget {
+class FristPageOfAdmin extends StatefulWidget {
   @override
-  _HomePageOfCustomerState createState() => _HomePageOfCustomerState();
+  _FristPageOfAdminState createState() => _FristPageOfAdminState();
 }
 
-class _HomePageOfCustomerState extends State<HomePageOfCustomer> {
+class _FristPageOfAdminState extends State<FristPageOfAdmin> {
   int _curruntIndex = 3;
-
   List<Widget> _widgetOption = <Widget>[
+    // AccountOfAdmin(),
     AccountMarket(),
-    Cart(),
-    Order(),
-    Login(),
+    DriverPageOfAdmin(),
+    MarketPageOfAdmin(),
+    HomePageOfAdmin(),
   ];
   @override
   Widget build(BuildContext context) {
@@ -33,18 +34,18 @@ class _HomePageOfCustomerState extends State<HomePageOfCustomer> {
             backgroundColor: Colors.lightBlue[400],
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_cart_outlined),
-            title: Text('Cart'),
+            icon: Icon(Icons.drive_eta_outlined),
+            title: Text('Driver page'),
             backgroundColor: Colors.lightBlue[600],
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_bag_outlined),
-            title: Text('Order'),
+            icon: Icon(Icons.store),
+            title: Text('Market page'),
             backgroundColor: Colors.lightBlue[200],
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.store),
-            title: Text('Market'),
+            icon: Icon(Icons.people_outline_rounded),
+            title: Text('Customer page'),
             backgroundColor: Colors.lightBlue[400],
           ),
         ],

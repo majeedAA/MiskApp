@@ -118,7 +118,8 @@ class _SettingsFormState extends State<SettingsForm> {
                               snapshot.data.isCustomer,
                               snapshot.data.isMarket,
                               snapshot.data.isDriver,
-                              false ?? false);
+                              false ?? false,
+                              snapshot.data.isActive);
                           Navigator.pop(context);
                         }
                       }),

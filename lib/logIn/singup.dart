@@ -40,6 +40,7 @@ class _RegesterState extends State<Regester> {
   bool isCustomer = true;
   bool isMaatket = false;
   bool isDriver = false;
+  bool isActive = false;
   int phone;
   bool loading = false;
 
@@ -166,6 +167,7 @@ class _RegesterState extends State<Regester> {
                                       isCustomer = true;
                                       isDriver = false;
                                       isMaatket = false;
+                                      isActive = true;
                                     });
                                   }),
                               Text('As Customer'),
@@ -227,10 +229,6 @@ class _RegesterState extends State<Regester> {
                               ),
                               onPressed: () async {
                                 if (_formKey.currentState.validate()) {
-                                  print('Cus $isCustomer');
-                                  print('Dri $isDriver');
-                                  print('mar $isMaatket');
-
                                   setState(() => loading = true);
                                   dynamic result =
                                       await _auth.registerWithEmailAndPassword(
@@ -242,7 +240,8 @@ class _RegesterState extends State<Regester> {
                                           isCustomer,
                                           isMaatket,
                                           isDriver,
-                                          false);
+                                          false,
+                                          isActive);
                                   if (result == null) {
                                     setState(() {
                                       loading = false;

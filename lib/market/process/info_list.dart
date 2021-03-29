@@ -25,24 +25,24 @@ class _ItemListState extends State<ItemList> {
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<User>(context);
-    Future getImage() async {
-      var image = await ImagePicker.pickImage(source: ImageSource.gallery);
+    // Future getImage() async {
+    //   var image = await ImagePicker.pickImage(source: ImageSource.gallery);
 
-      if (image != null) {
-        _image = File(image.path);
-        String fileName = basename(_image.path);
-        StorageReference firebaseStorgeRef =
-            FirebaseStorage.instance.ref().child(fileName);
-        StorageUploadTask uploadTask = firebaseStorgeRef.putFile(_image);
-        var dowurl = await (await uploadTask.onComplete).ref.getDownloadURL();
-        var url = dowurl.toString();
-        theImage = url;
-        DatabaseService(uid: user.uid).updateImageUserData(theImage);
-        print('done');
-      } else {
-        print('No image selected.');
-      }
-    }
+    //   if (image != null) {
+    //     _image = File(image.path);
+    //     String fileName = basename(_image.path);
+    //     StorageReference firebaseStorgeRef =
+    //         FirebaseStorage.instance.ref().child(fileName);
+    //     StorageUploadTask uploadTask = firebaseStorgeRef.putFile(_image);
+    //     var dowurl = await (await uploadTask.onComplete).ref.getDownloadURL();
+    //     var url = dowurl.toString();
+    //     theImage = url;
+    //     DatabaseService(uid: user.uid).updateImageUserData(theImage);
+    //     print('done');
+    //   } else {
+    //     print('No image selected.');
+    //   }
+    // }
 
     final AuthService _auth = AuthService();
     final _width = MediaQuery.of(context).size.width;
@@ -51,7 +51,7 @@ class _ItemListState extends State<ItemList> {
     return StreamBuilder<UserData>(
         stream: DatabaseService(uid: user.uid).userData,
         builder: (context, snapshot) {
-          UserData userData = snapshot.data;
+          UserData userData = snapshot.data ?? [];
           return Container(
             child: new Stack(
               children: <Widget>[
@@ -82,17 +82,17 @@ class _ItemListState extends State<ItemList> {
                                     child: SizedBox(
                                       width: 300,
                                       height: 3000,
-                                      child: userData.image == '' ||
-                                              userData.image == null
-                                          ? Image.network(defoltImage ?? '')
-                                          : Image.network(userData.image ?? ''),
+                                      // child: userData.image == '' ||
+                                      //         userData.image == null
+                                      //     ? Image.network(defoltImage ?? '')
+                                      //     : Image.network(userData.image ?? ''),
                                     ),
                                   ),
                                 ),
                                 IconButton(
                                   icon: Icon(Icons.camera),
                                   onPressed: () {
-                                    getImage();
+                                    // getImage();
                                   },
                                 ),
                                 new SizedBox(
@@ -122,30 +122,9 @@ class _ItemListState extends State<ItemList> {
                               right: _width / 20),
                           child: new Column(
                             children: <Widget>[
-                              // new Container(
-                              //   decoration: new BoxDecoration(
-                              //       color: Colors.white,
-                              //       boxShadow: [
-                              //         new BoxShadow(
-                              //             color: Colors.black45,
-                              //             blurRadius: 2.0,
-                              //             offset: new Offset(0.0, 2.0))
-                              //       ]),
-                              //   child: new Padding(
-                              //     padding: new EdgeInsets.all(_width / 20),
-                              //     child: new Row(
-                              //         mainAxisAlignment: MainAxisAlignment.center,
-                              //         children: <Widget>[
-                              //           headerChild('Photos', 114),
-                              //           headerChild('Followers', 1205),
-                              //           headerChild('Following', 360),
-                              //         ]),
-                              //   ),
-                              // ),
                               SizedBox(
                                 height: 30,
                               ),
-
                               new Padding(
                                 padding: new EdgeInsets.only(top: _height / 20),
                                 child: new Column(
@@ -171,8 +150,6 @@ class _ItemListState extends State<ItemList> {
                                       padding: new EdgeInsets.only(
                                           top: _height / 30),
                                       child: new Container(
-                                        // width: _width / 3,
-                                        // height: _height / 20,
                                         decoration: new BoxDecoration(
                                             color: const Color(0xFF26CBE6),
                                             borderRadius: new BorderRadius.all(
@@ -217,23 +194,6 @@ class _ItemListState extends State<ItemList> {
           );
         });
   }
-
-  Widget headerChild(String header, int value) => new Expanded(
-          child: new Column(
-        children: <Widget>[
-          new Text(header),
-          new SizedBox(
-            height: 8.0,
-          ),
-          new Text(
-            '$value',
-            style: new TextStyle(
-                fontSize: 14.0,
-                color: const Color(0xFF26CBE6),
-                fontWeight: FontWeight.bold),
-          )
-        ],
-      ));
 
   Widget infoChild(double width, IconData icon, data) => new Padding(
         padding: new EdgeInsets.only(bottom: 8.0),

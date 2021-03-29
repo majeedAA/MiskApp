@@ -16,6 +16,7 @@ class UserData {
   final bool isMarket;
   final bool isDriver;
   final bool isAdmin;
+  final bool isActive;
   final String image;
 
   UserData(
@@ -29,6 +30,7 @@ class UserData {
       this.isMarket,
       this.isDriver,
       this.isAdmin,
+      this.isActive,
       this.image});
 }
 

@@ -30,6 +30,7 @@ class DatabaseService {
     bool isMarket,
     bool isDriver,
     bool isAdmin,
+    bool isActive,
   ) async {
     return await userCollection.document(uid).setData({
       'idUser': id,
@@ -41,6 +42,7 @@ class DatabaseService {
       'isMarket': isMarket,
       'isDriver': isDriver,
       'isAdmin': isAdmin,
+      'isActive': isActive,
       'image': ''
     });
   }
@@ -67,6 +69,10 @@ class DatabaseService {
 
   Future<void> updatemenuImage(String image, String id) async {
     return await menuCollection.document(id).updateData({'image': image});
+  }
+
+  Future<void> updateUserActive(bool isActive, String id) async {
+    return await userCollection.document(id).updateData({'isActive': isActive});
   }
 
 //new
@@ -135,6 +141,7 @@ class DatabaseService {
         isMarket: doc.data['isMarket'] ?? false,
         isDriver: doc.data['isDriver'] ?? false,
         isAdmin: doc.data['isAdmin'] ?? false,
+        isActive: doc.data['isActive'] ?? false,
         image: doc.data['image'] ?? '',
       );
     }).toList();
@@ -178,6 +185,7 @@ class DatabaseService {
       isMarket: snapshot.data['isMarket'],
       isDriver: snapshot.data['isDriver'],
       isAdmin: snapshot.data['isAdmin'],
+      isActive: snapshot.data['isAdmin'],
       image: snapshot.data['image'],
     );
   }

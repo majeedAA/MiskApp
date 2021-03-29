@@ -59,7 +59,8 @@ class AuthService {
       bool isCustomer,
       bool isMarket,
       bool isDriver,
-      bool isAdmin) async {
+      bool isAdmin,
+      bool isActive) async {
     try {
       AuthResult result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
@@ -67,7 +68,7 @@ class AuthService {
 
       // create a new document for the user with the uid
       await DatabaseService(uid: user.uid).updateUserData(user.uid, city, name,
-          email, phone, isCustomer, isMarket, isDriver, isAdmin);
+          email, phone, isCustomer, isMarket, isDriver, isAdmin, isActive);
       return _userFromFirebaseUser(user);
     } on PlatformException catch (e) {
       print(e.toString());

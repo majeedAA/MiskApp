@@ -7,8 +7,7 @@ import 'package:miskapp/customer/processCus/listOfMarket.dart';
 import 'package:miskapp/module/item.dart';
 import 'package:miskapp/service/database.dart';
 import 'package:provider/provider.dart';
-import 'Resuble_card.dart';
-import 'buttonB.dart';
+//import 'package:geolocator/geolocator.dart';
 
 class Login extends StatelessWidget {
 // This widget is the root of your application.
@@ -21,7 +20,7 @@ class Login extends StatelessWidget {
             appBar: AppBar(
               actions: <Widget>[
                 FlatButton.icon(
-                  icon: Icon(Icons.shopping_bag),
+                  icon: Icon(Icons.location_on_outlined),
                   label: Text(''),
                   onPressed: () {
                     Navigator.push(
