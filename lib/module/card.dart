@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 class Cardd {
   final String idCustomer;
   final String idMarket;
@@ -8,16 +6,17 @@ class Cardd {
   final int quantity;
   final double price;
   final double totalprice;
+  final String idOfCart;
 
-  Cardd({
-    this.idCustomer,
-    this.idMarket,
-    this.idDriver,
-    this.nameOfItem,
-    this.quantity,
-    this.price,
-    this.totalprice,
-  });
+  Cardd(
+      {this.idCustomer,
+      this.idMarket,
+      this.idDriver,
+      this.nameOfItem,
+      this.quantity,
+      this.price,
+      this.totalprice,
+      this.idOfCart});
 }
 
 class CardData {

@@ -1,16 +1,28 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:miskapp/customer/processCus/items_market.dart';
-import 'package:miskapp/market/homePageMarket.dart';
 import 'package:miskapp/module/item.dart';
-import 'package:miskapp/module/user.dart';
-import 'package:provider/provider.dart';
+import 'dart:math';
 
 class MarketTile extends StatelessWidget {
+  final double userLati;
+  final double userLongi;
   final Item market;
-  MarketTile({this.market});
+  MarketTile({this.market, this.userLati, this.userLongi});
   @override
   Widget build(BuildContext context) {
+    double dins = 0;
+    double driveCost = 0;
+
+    double marketLongi = market.longitude;
+    double marketLati = market.latitude;
+
+    dins = (((userLati - marketLati) * (userLati - marketLati)) +
+        ((userLongi - marketLongi) * (userLongi - marketLongi)));
+
+    dins = sqrt(dins);
+    dins = dins * 100;
+    dins < 5 ? driveCost = 15 : driveCost = dins * 3;
+
     return GestureDetector(
       onTap: () {
         Navigator.push(
@@ -31,7 +43,8 @@ class MarketTile extends StatelessWidget {
               backgroundColor: Colors.greenAccent[100],
             ),
             title: Text(market.name),
-            //subtitle: Text('Takes ${market.phone} Phone'),
+            subtitle: Text(
+                '${dins.roundToDouble()} Km \n${driveCost.roundToDouble()} SAR'),
           ),
         ),
       ),

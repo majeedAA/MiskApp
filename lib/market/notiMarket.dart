@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'NotiProcessMarket.dart';
+import 'package:miskapp/market/forNewOrder/list_of_bast_order.dart';
+import 'package:miskapp/module/new_order.dart';
+import 'package:miskapp/service/database.dart';
+import 'package:provider/provider.dart';
 
 class NotiMarket extends StatelessWidget {
   @override
@@ -16,24 +19,19 @@ class Notification extends StatefulWidget {
 class _NotificationState extends State<Notification> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'MISK Notification market',
-          style: TextStyle(color: Color(0xffffffff)),
-        ),
-        backgroundColor: Color(0xffbabbbb),
-      ),
-      body: ListView(
-        children: <Widget>[
-          TheNotifProcess(
-            marketName: 'majeed',
-          ),
-          TheNotifProcess(
-            marketName: 'majeed',
-          ),
-        ],
-      ),
-    );
+    return StreamProvider<List<NewOrder>>.value(
+        value: DatabaseService().newOrder,
+        builder: (context, snapshot) {
+          return Scaffold(
+            appBar: AppBar(
+              title: Text(
+                'MISK Bast orders',
+                style: TextStyle(color: Color(0xffffffff)),
+              ),
+              backgroundColor: Color(0xffbabbbb),
+            ),
+            body: ListOfLastOrderMarket(),
+          );
+        });
   }
 }

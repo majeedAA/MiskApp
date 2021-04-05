@@ -44,7 +44,6 @@ class AuthService {
       return user;
     } on PlatformException catch (error) {
       print(error.toString());
-      return null;
     }
   }
 

@@ -7,17 +7,17 @@ class CheckCode extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: code(),
+      home: Code(),
     );
   }
 }
 
-class code extends StatefulWidget {
+class Code extends StatefulWidget {
   @override
-  _forgetState createState() => _forgetState();
+  _ForgetState createState() => _ForgetState();
 }
 
-class _forgetState extends State<code> {
+class _ForgetState extends State<Code> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

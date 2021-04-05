@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 class User {
   final String uid;
   User({this.uid});
@@ -18,6 +16,8 @@ class UserData {
   final bool isAdmin;
   final bool isActive;
   final String image;
+  final double latitude;
+  final double longitude;
 
   UserData(
       {this.id,
@@ -31,7 +31,9 @@ class UserData {
       this.isDriver,
       this.isAdmin,
       this.isActive,
-      this.image});
+      this.image,
+      this.latitude,
+      this.longitude});
 }
 
 class MenuData {

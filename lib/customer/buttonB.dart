@@ -29,6 +29,7 @@ class _HomePageOfCustomerState extends State<HomePageOfCustomer> {
         items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
+            // label: 'Account',
             title: Text('Account'),
             backgroundColor: Colors.lightBlue[400],
           ),

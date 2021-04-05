@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/material.dart';
+
 import 'homePageMarket.dart';
 import 'pageOfMenu.dart';
 import 'notiMarket.dart';
@@ -15,8 +15,8 @@ class _HomePageMarketState extends State<HomePageMarket> {
 
   List<Widget> _widgetOption = <Widget>[
     AccountMarket(),
-    NotiMarket(),
     MenuMarket(),
+    NotiMarket(),
     LogInMarket(),
   ];
 
@@ -35,18 +35,18 @@ class _HomePageMarketState extends State<HomePageMarket> {
             backgroundColor: Color(0xff343a40),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.notifications_active_rounded),
-            title: Text('notification'),
-            backgroundColor: Colors.deepOrange[300],
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.restaurant_menu_outlined),
+            icon: Icon(Icons.menu_book_rounded),
             title: Text('Menu'),
             backgroundColor: Colors.yellow[900],
           ),
           BottomNavigationBarItem(
+            icon: Icon(Icons.shopping_bag_outlined),
+            title: Text('Past order'),
+            backgroundColor: Colors.deepOrange[300],
+          ),
+          BottomNavigationBarItem(
             icon: Icon(Icons.shopping_bag),
-            title: Text('Order'),
+            title: Text('new Order'),
             backgroundColor: Colors.lightBlueAccent[200],
           ),
         ],

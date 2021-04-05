@@ -1,8 +1,5 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:miskapp/module/menu.dart';
 import 'package:miskapp/module/user.dart';
-import 'package:miskapp/service/auth.dart';
 import 'package:miskapp/service/database.dart';
 import 'package:miskapp/shared/loding.dart';
 import 'package:provider/provider.dart';
@@ -41,11 +38,10 @@ class _SittingAddToCardState extends State<SittingAddToCard> {
       this.itemCatigory,
       this.itemUnit,
       this.itemPrice});
-
-  @override
   final _formKey = GlobalKey<FormState>();
-  int _count = 1;
   double _totalPrice;
+  int _count = 1;
+  @override
   Widget build(BuildContext context) {
     final user = Provider.of<User>(context);
     return Form(

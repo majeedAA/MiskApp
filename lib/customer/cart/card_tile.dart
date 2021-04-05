@@ -4,14 +4,13 @@ import 'package:miskapp/module/card.dart';
 
 final userRef = Firestore.instance.collection('card');
 
-class CardTile extends StatelessWidget {
+class CardCustomerTile extends StatelessWidget {
   final Cardd card;
-  CardTile({
+  CardCustomerTile({
     this.card,
   });
 
   String idItem = '';
-
   getUsers(Cardd card) {
     userRef.getDocuments().then((QuerySnapshot snapshot) {
       snapshot.documents.forEach((element) {

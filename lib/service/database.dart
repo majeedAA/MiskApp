@@ -1,9 +1,13 @@
 // import 'dart:html';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+
+import 'package:miskapp/module/chat.dart';
+import 'package:miskapp/module/coupon.dart';
 import 'package:miskapp/module/item.dart';
 import 'package:miskapp/module/menu.dart';
 import 'package:miskapp/module/card.dart';
+import 'package:miskapp/module/new_order.dart';
 import 'package:miskapp/module/user.dart';
 
 class DatabaseService {
@@ -19,6 +23,15 @@ class DatabaseService {
 
   final CollectionReference cardCollection =
       Firestore.instance.collection('card');
+
+  final CollectionReference couponCollection =
+      Firestore.instance.collection('coupon');
+
+  final CollectionReference newOrderCollection =
+      Firestore.instance.collection('newOrder');
+
+  final CollectionReference chatCollection =
+      Firestore.instance.collection('chat');
 
   Future<void> updateUserData(
     String id,
@@ -43,7 +56,9 @@ class DatabaseService {
       'isDriver': isDriver,
       'isAdmin': isAdmin,
       'isActive': isActive,
-      'image': ''
+      'image': '',
+      'latitude': 0.0,
+      'longitude': 0.0
     });
   }
 
@@ -52,6 +67,41 @@ class DatabaseService {
   ) async {
     return await userCollection.document(uid).updateData({
       'image': image,
+    });
+  }
+
+  Future<void> updateStateOfOrder(
+    String id,
+    bool state,
+  ) async {
+    return await newOrderCollection.document(id).updateData({
+      'state': !state,
+    });
+  }
+
+  Future<void> updateAcceptOfOrder(
+    String id,
+    bool state,
+  ) async {
+    return await newOrderCollection.document(id).updateData({
+      'accept': !state,
+    });
+  }
+
+  Future<void> updateWhatOfOrder(
+    String id,
+    String what,
+    dynamic state,
+  ) async {
+    return await newOrderCollection.document(id).updateData({
+      '$what': state,
+    });
+  }
+
+  Future<void> updateLocationUserData(double lati, double longi) async {
+    return await userCollection.document(uid).updateData({
+      'latitude': lati,
+      'longitude': longi,
     });
   }
 
@@ -64,6 +114,50 @@ class DatabaseService {
       'price': price,
       'caticury': caticury,
       'image': ''
+    });
+  }
+
+  Future<void> updateChatData(
+      String sender, String receiver, String orderId, String message) async {
+    return await chatCollection.document().setData({
+      'sender': sender,
+      'receiver': receiver,
+      'orderId': orderId,
+      'message': message,
+    });
+  }
+
+  Future<void> updateNewOrderData(
+      List allOrder,
+      String customerId,
+      String marketId,
+      String pay,
+      String notis,
+      String time,
+      bool driveIt,
+      double total) async {
+    return await newOrderCollection.document().setData({
+      'allOrder': allOrder,
+      'customerId': customerId,
+      'marketId': marketId,
+      'pay': pay,
+      'notis': notis,
+      'time': time,
+      'driveIt': driveIt,
+      'total': total,
+      'state': true,
+      'accept': false,
+      'tikeIt': false,
+      'toDriver': false,
+      'ready': false,
+      'tikeItDriver': false
+    });
+  }
+
+  Future<void> updateCouponData(int number, String name) async {
+    return await couponCollection.document().setData({
+      'number': number,
+      'name': name,
     });
   }
 
@@ -89,7 +183,6 @@ class DatabaseService {
       'nameOfItem': nameOfItem,
       'idMarket': idMarket,
       'idDriver': idDriver,
-      'nameOfItem': nameOfItem,
       'totalprice': totalprice,
       'price': price,
       'quantity': quantity,
@@ -111,19 +204,64 @@ class DatabaseService {
     }).toList();
   }
 
+  List<Chat> _chatListFromSnapshot(QuerySnapshot snapshot) {
+    return snapshot.documents.map((doc) {
+      return Chat(
+        sender: doc.data['sender'] ?? '',
+        receiver: doc.data['receiver'] ?? '',
+        message: doc.data['message'] ?? '',
+        orderId: doc.data['orderId'] ?? '',
+        idOfChat: doc.documentID,
+      );
+    }).toList();
+  }
+
+  List<NewOrder> _newOrderListFromSnapshot(QuerySnapshot snapshot) {
+    return snapshot.documents.map((doc) {
+      return NewOrder(
+        allOrder: doc.data['allOrder'] ?? [],
+        customerId: doc.data['customerId'] ?? '',
+        marketId: doc.data['marketId'] ?? '',
+        pay: doc.data['pay'] ?? '',
+        notis: doc.data['notis'] ?? '',
+        time: doc.data['time'] ?? '',
+        driveIt: doc.data['driveIt'] ?? false,
+        total: doc.data['total'] ?? 0.0,
+        idOfOrder: doc.documentID,
+        state: doc.data['state'] ?? false,
+        accept: doc.data['accept'] ?? false,
+        tikeIt: doc.data['tikeIt'] ?? false,
+        toDriver: doc.data['toDriver'] ?? false,
+        ready: doc.data['ready'] ?? false,
+        tikeItDriver: doc.data['tikeItDriver'] ?? false,
+        driverId: doc.data['driverId'] ?? '',
+      );
+    }).toList();
+  }
+
+  List<Coupon> _couponListFromSnapshot(QuerySnapshot snapshot) {
+    return snapshot.documents.map((doc) {
+      return Coupon(
+        number: doc.data['number'] ?? 0,
+        name: doc.data['name'] ?? '',
+        idOfCoupon: doc.documentID,
+      );
+    }).toList();
+  }
+
   //new
   List<Cardd> _cardListFromSnapshot(QuerySnapshot snapshot) {
     return snapshot.documents.map((doc) {
       //print(doc.data);
       return Cardd(
-        idCustomer: doc.data['idCustomer'] ?? '',
-        idMarket: doc.data['idMarket'] ?? '',
-        idDriver: doc.data['idDriver'] ?? '',
-        nameOfItem: doc.data['nameOfItem'] ?? '',
-        quantity: doc.data['quantity'] ?? 0,
-        price: doc.data['price'] ?? 0,
-        totalprice: doc.data['totalprice'] ?? 0,
-      );
+          idCustomer: doc.data['idCustomer'] ?? '',
+          idMarket: doc.data['idMarket'] ?? '',
+          idDriver: doc.data['idDriver'] ?? '',
+          nameOfItem: doc.data['nameOfItem'] ?? '',
+          quantity: doc.data['quantity'] ?? 0,
+          price: doc.data['price'] ?? 0,
+          totalprice: doc.data['totalprice'] ?? 0,
+          idOfCart: doc.documentID);
     }).toList();
   }
 
@@ -132,17 +270,19 @@ class DatabaseService {
     return snapshot.documents.map((doc) {
       //print(doc.data);
       return Item(
-        id: doc.data['idUser'] ?? '',
-        name: doc.data['name'] ?? '',
-        email: doc.data['email'] ?? '',
+        id: doc.data['idUser'] ?? ' ',
+        name: doc.data['name'] ?? ' ',
+        email: doc.data['email'] ?? ' ',
         phone: doc.data['phone'] ?? 0,
-        sity: doc.data['sity'] ?? '',
+        sity: doc.data['sity'] ?? ' ',
         isCustomer: doc.data['isCustomer'] ?? false,
         isMarket: doc.data['isMarket'] ?? false,
         isDriver: doc.data['isDriver'] ?? false,
         isAdmin: doc.data['isAdmin'] ?? false,
         isActive: doc.data['isActive'] ?? false,
-        image: doc.data['image'] ?? '',
+        image: doc.data['image'] ?? ' ',
+        latitude: doc.data['latitude'] ?? 0.0,
+        longitude: doc.data['longitude'] ?? 0.0,
       );
     }).toList();
   }
@@ -150,6 +290,14 @@ class DatabaseService {
   // get  stream
   Stream<List<Menu>> get menus {
     return menuCollection.snapshots().map(_menuListFromSnapshot);
+  }
+
+  Stream<List<Chat>> get chats {
+    return chatCollection.snapshots().map(_chatListFromSnapshot);
+  }
+
+  Stream<List<NewOrder>> get newOrder {
+    return newOrderCollection.snapshots().map(_newOrderListFromSnapshot);
   }
 
 // new
@@ -161,9 +309,17 @@ class DatabaseService {
     return userCollection.snapshots().map(_itemListFromSnapshot);
   }
 
+  Stream<List<Coupon>> get coupon {
+    return couponCollection.snapshots().map(_couponListFromSnapshot);
+  }
+
   // get market stream
   Stream<QuerySnapshot> get info {
     return userCollection.snapshots();
+  }
+
+  Stream<QuerySnapshot> get chat {
+    return chatCollection.snapshots();
   }
 
 //new
@@ -185,8 +341,20 @@ class DatabaseService {
       isMarket: snapshot.data['isMarket'],
       isDriver: snapshot.data['isDriver'],
       isAdmin: snapshot.data['isAdmin'],
-      isActive: snapshot.data['isAdmin'],
+      isActive: snapshot.data['isActive'],
       image: snapshot.data['image'],
+      latitude: snapshot.data['latitude'] ?? 0,
+      longitude: snapshot.data['longitude'] ?? 0,
+    );
+  }
+
+  ChatDate _chatDataFromSnapshot(DocumentSnapshot snapshot) {
+    return ChatDate(
+      sender: snapshot.data['sender'],
+      receiver: snapshot.data['receiver'],
+      orderId: snapshot.data['orderId'],
+      message: snapshot.data['message'],
+      idOfChat: snapshot.documentID,
     );
   }
 
@@ -200,6 +368,20 @@ class DatabaseService {
       quantity: snapshot.data['quantity'],
       price: snapshot.data['price'],
     );
+  }
+
+  NewOrderData _newOrderDataFromSnapshot(DocumentSnapshot snapshot) {
+    return NewOrderData(
+        allOrder: snapshot.data['allOrder'],
+        customerId: snapshot.data['customerId'],
+        marketId: snapshot.data['marketId'],
+        pay: snapshot.data['pay'],
+        notis: snapshot.data['notis'],
+        driveIt: snapshot.data['driveIt'],
+        time: snapshot.data['time'],
+        total: snapshot.data['total'],
+        state: snapshot.data['state'],
+        idOfOrder: snapshot.documentID);
   }
 
   MenuData _menuDataFromSnapshot(DocumentSnapshot snapshot) {
@@ -224,5 +406,16 @@ class DatabaseService {
   // new
   Stream<CardData> get cardData {
     return cardCollection.document(uid).snapshots().map(_cardDataFromSnapshot);
+  }
+
+  Stream<ChatDate> get chatData {
+    return cardCollection.document(uid).snapshots().map(_chatDataFromSnapshot);
+  }
+
+  Stream<NewOrderData> get newOrderData {
+    return newOrderCollection
+        .document(uid)
+        .snapshots()
+        .map(_newOrderDataFromSnapshot);
   }
 }

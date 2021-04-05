@@ -10,6 +10,8 @@ class Item {
   final bool isAdmin;
   final bool isActive;
   final String image;
+  final double latitude;
+  final double longitude;
 
   Item(
       {this.id,
@@ -22,5 +24,7 @@ class Item {
       this.isDriver,
       this.isAdmin,
       this.isActive,
-      this.image});
+      this.image,
+      this.latitude,
+      this.longitude});
 }

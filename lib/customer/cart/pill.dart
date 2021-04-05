@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:miskapp/module/card.dart';
 import 'package:miskapp/module/user.dart';
+import 'package:miskapp/service/database.dart';
 import 'package:provider/provider.dart';
 
 class Pill extends StatefulWidget {
@@ -10,11 +11,8 @@ class Pill extends StatefulWidget {
 }
 
 class _PillState extends State<Pill> {
-  // void initState() {
+  final _formKey = GlobalKey<FormState>();
 
-  // }
-
-  List<dynamic> allItem = [];
   final List<String> pays = [
     'cash',
     'mada',
@@ -22,8 +20,6 @@ class _PillState extends State<Pill> {
     'Visa',
   ];
   String idMarket = '';
-
-  dynamic total = 0;
 
   String pay;
 
@@ -41,25 +37,47 @@ class _PillState extends State<Pill> {
 
   @override
   Widget build(BuildContext context) {
+    List<Cardd> itemOfCustomer = [];
+    List<dynamic> allItem = [];
+
+    dynamic total = 0;
     final user = Provider.of<User>(context);
     final card = Provider.of<List<Cardd>>(context) ?? [];
+
     for (var i = 0; i < card.length; i++) {
-      if (card[i].idCustomer == user.uid &&
-          card[0].idMarket == card[i].idMarket) {
-        total += card[i].totalprice;
-        idMarket = card[i].idMarket;
-        allItem.add(card[i].idCustomer);
-        allItem.add(card[i].idMarket);
-        allItem.add(card[i].nameOfItem);
-        allItem.add(card[i].price);
-        allItem.add(card[i].quantity);
-        allItem.add(card[i].totalprice);
-        allItem.add('done');
+      if (card[i].idCustomer == user.uid) {
+        itemOfCustomer.add(card[i]);
       }
     }
 
-    // print(allItem);
+    for (var i = 0; i < itemOfCustomer.length; i++) {
+      idMarket = itemOfCustomer[0].idMarket;
+      if (itemOfCustomer[0].idMarket == itemOfCustomer[i].idMarket) {
+        total += itemOfCustomer[i].totalprice;
+        idMarket = itemOfCustomer[i].idMarket;
+        allItem.add(itemOfCustomer[i].nameOfItem);
+        allItem.add(itemOfCustomer[i].price);
+        allItem.add(itemOfCustomer[i].quantity);
+        allItem.add(itemOfCustomer[i].totalprice);
+      }
+    }
+    void deletItem() {
+      for (var i = 0; i < card.length; i++) {
+        if (card[i].idCustomer == user.uid) {
+          Firestore.instance
+              .collection('card')
+              .document(card[i].idOfCart)
+              .delete();
+        }
+      }
+    }
+
+    driveIt ? total = total + 15 : total = total + 5;
+    total == 5 || total == 15 ? total = 0 : total = total;
+
+    //print(allItem.asMap());
     return Expanded(
+      key: _formKey,
       child: ListView(
         children: [
           Container(
@@ -69,14 +87,18 @@ class _PillState extends State<Pill> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
                 TextFormField(
-                  readOnly: false,
+                  //validator: (val) => val.isEmpty ? val = 'nothing' : null,
                   initialValue: '',
                   cursorColor: Colors.black,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
-                    labelText: '  any Notis?',
+                    labelText: '  any Notes?',
                   ),
-                  onChanged: (val) {},
+                  onChanged: (val) {
+                    setState(() {
+                      notis = val;
+                    });
+                  },
                 ),
                 SizedBox(
                   height: 20,
@@ -84,14 +106,13 @@ class _PillState extends State<Pill> {
                 Row(
                   children: [
                     Text(
-                      'Total :',
+                      driveIt ? 'total with drive: ' : 'total with bickup: ',
                       style:
                           TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
                     Text(
                       '$total',
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                      style: TextStyle(fontSize: 20),
                     ),
                   ],
                 ),
@@ -116,12 +137,12 @@ class _PillState extends State<Pill> {
                   height: 10,
                 ),
                 TextFormField(
-                  readOnly: false,
+                  validator: (val) => val.isEmpty ? val = 'know' : null,
                   initialValue: '',
                   cursorColor: Colors.black,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
-                    labelText: 'Time for tick it',
+                    labelText: 'Time to take it',
                   ),
                   onChanged: (val) => setState(() => time = val),
                 ),
@@ -154,7 +175,7 @@ class _PillState extends State<Pill> {
                           Icons.shopping_bag_sharp,
                           color: driveIt == false ? ava : non,
                         ),
-                        label: Text('Bickup')),
+                        label: Text('Pickup')),
                   ],
                 ),
                 Container(
@@ -166,20 +187,16 @@ class _PillState extends State<Pill> {
                         borderRadius: BorderRadius.circular(10.0),
                       ),
                       onPressed: () async {
-                        // if (_formKey.currentState.validate()) {
-                        //   await DatabaseService(uid: user.uid).updatCardData(
-                        //     user.uid ?? '',
-                        //     marketId ?? '',
-                        //     '' ?? '',
-                        //     itemName ?? '',
-                        //     _totalPrice ?? itemPrice,
-                        //     itemPrice ?? 0,
-                        //     _count ?? 0,
-                        //   );
-                        //   Navigator.pop(context);
-                        // } else {
-                        //   return Loading();
-                        // }
+                        await DatabaseService(uid: user.uid).updateNewOrderData(
+                            allItem,
+                            user.uid,
+                            idMarket,
+                            pay,
+                            notis,
+                            time,
+                            driveIt,
+                            total);
+                        deletItem();
                       }),
                 ),
               ],

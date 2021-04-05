@@ -2,22 +2,27 @@ import 'package:flutter/material.dart';
 import 'loginPage.dart';
 import 'check_code.dart';
 
-class ForgetPassword extends StatelessWidget {
+class ForgetPassword extends StatefulWidget {
 // This widget is the root of your application.
+  @override
+  _ForgetPasswordState createState() => _ForgetPasswordState();
+}
+
+class _ForgetPasswordState extends State<ForgetPassword> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: forget(),
+      home: Forget(),
     );
   }
 }
 
-class forget extends StatefulWidget {
+class Forget extends StatefulWidget {
   @override
-  _forgetState createState() => _forgetState();
+  _ForgetState createState() => _ForgetState();
 }
 
-class _forgetState extends State<forget> {
+class _ForgetState extends State<Forget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

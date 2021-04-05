@@ -1,15 +1,9 @@
-import 'dart:io';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_storage/firebase_storage.dart';
+//import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:miskapp/module/item.dart';
 import 'package:miskapp/module/user.dart';
 import 'package:miskapp/service/auth.dart';
 import 'package:miskapp/service/database.dart';
 import 'package:provider/provider.dart';
-import 'package:path/path.dart';
 
 class ItemList extends StatefulWidget {
   @override
@@ -17,7 +11,7 @@ class ItemList extends StatefulWidget {
 }
 
 class _ItemListState extends State<ItemList> {
-  File _image;
+  //File _image;
   String theImage = '';
   String defoltImage =
       'https://cdn.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png';
@@ -51,7 +45,7 @@ class _ItemListState extends State<ItemList> {
     return StreamBuilder<UserData>(
         stream: DatabaseService(uid: user.uid).userData,
         builder: (context, snapshot) {
-          UserData userData = snapshot.data ?? [];
+          UserData userData = snapshot.data;
           return Container(
             child: new Stack(
               children: <Widget>[

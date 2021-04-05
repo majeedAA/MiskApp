@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:miskapp/market/process/info_list.dart';
 import 'package:miskapp/market/process/setting_form.dart';
-import 'package:miskapp/module/user.dart';
-import 'package:miskapp/service/auth.dart';
 import 'package:miskapp/service/database.dart';
 import 'package:provider/provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';

@@ -1,18 +1,30 @@
-// import 'dart:html';
-import 'package:anim_search_bar/anim_search_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:miskapp/customer/cart/cart_customer.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:miskapp/customer/processCus/listOfMarket.dart';
 import 'package:miskapp/module/item.dart';
+import 'package:miskapp/module/user.dart';
 import 'package:miskapp/service/database.dart';
 import 'package:provider/provider.dart';
-//import 'package:geolocator/geolocator.dart';
 
-class Login extends StatelessWidget {
-// This widget is the root of your application.
+class Login extends StatefulWidget {
+  @override
+  _LoginState createState() => _LoginState();
+}
+
+class _LoginState extends State<Login> {
+  void _getCurruntLocation(String uid) async {
+    final Position position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high);
+    setState(() {
+      DatabaseService(uid: uid)
+          .updateLocationUserData(position.latitude, position.longitude);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<User>(context);
     return StreamProvider<List<Item>>.value(
         value: DatabaseService().items,
         builder: (context, snapshot) {
@@ -23,11 +35,7 @@ class Login extends StatelessWidget {
                   icon: Icon(Icons.location_on_outlined),
                   label: Text(''),
                   onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (BuildContext context) => Cart()),
-                    );
+                    _getCurruntLocation(user.uid);
                   },
                 )
               ],

@@ -26,7 +26,11 @@ class _ListOfMarketState extends State<ListOfMarket> {
             itemBuilder: (conbtext, index) {
               return market[index].isMarket
                   ? market[index].sity == userData.sity
-                      ? MarketTile(market: market[index])
+                      ? MarketTile(
+                          market: market[index],
+                          userLati: userData.latitude,
+                          userLongi: userData.longitude,
+                        )
                       : Container()
                   : Container();
             },

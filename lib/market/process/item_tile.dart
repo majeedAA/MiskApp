@@ -4,11 +4,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:miskapp/module/item.dart';
 import 'package:miskapp/module/menu.dart';
-import 'package:miskapp/module/user.dart';
 import 'package:miskapp/service/database.dart';
-import 'package:provider/provider.dart';
 import 'package:path/path.dart';
 
 final userRef = Firestore.instance.collection('menu');
@@ -81,15 +78,15 @@ class MenuTile extends StatelessWidget {
               leading: CircleAvatar(
                 radius: 25.0,
                 backgroundColor: Colors.brown[100],
-                child: ClipOval(
-                  child: SizedBox(
-                    width: 300,
-                    height: 3000,
-                    child: menu.image == '' || menu.image == null
-                        ? Image.network(defoltImage)
-                        : Image.network(menu.image),
-                  ),
-                ),
+                // child: ClipOval(
+                //   child: SizedBox(
+                //     width: 300,
+                //     height: 3000,
+                //     // child: menu.image == '' || menu.image == null
+                //     //     ? Image.network(defoltImage)
+                //     //     : Image.network(menu.image),
+                //   ),
+                // ),
               ),
               title: Text(menu.name),
               subtitle: Text('Takes ${menu.price} Price'),

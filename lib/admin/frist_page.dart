@@ -3,7 +3,6 @@ import 'package:miskapp/admin/account.dart';
 import 'package:miskapp/admin/driverPage.dart';
 import 'package:miskapp/admin/homePage_admin.dart';
 import 'package:miskapp/admin/marketPage.dart';
-import 'package:miskapp/market/accountMarket.dart';
 
 class FristPageOfAdmin extends StatefulWidget {
   @override
@@ -13,8 +12,8 @@ class FristPageOfAdmin extends StatefulWidget {
 class _FristPageOfAdminState extends State<FristPageOfAdmin> {
   int _curruntIndex = 3;
   List<Widget> _widgetOption = <Widget>[
-    // AccountOfAdmin(),
-    AccountMarket(),
+    AccountOfAdmin(),
+    // AccountMarket(),
     DriverPageOfAdmin(),
     MarketPageOfAdmin(),
     HomePageOfAdmin(),
