@@ -24,7 +24,7 @@ class _ListOfLastOrderMarketState extends State<ListOfLastOrderMarket> {
             itemCount: newOrder.length,
             itemBuilder: (conbtext, index) {
               return newOrder[index].marketId == user.uid
-                  ? !newOrder[index].state
+                  ? !newOrder[index].state || newOrder[index].tikeIt
                       ? BastOrderOfMarket(
                           order: newOrder[index],
                         )

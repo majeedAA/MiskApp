@@ -242,6 +242,7 @@ class _RegesterState extends State<Regester> {
                                           isDriver,
                                           false,
                                           isActive);
+
                                   if (result == null) {
                                     setState(() {
                                       loading = false;
@@ -272,13 +273,13 @@ class _RegesterState extends State<Regester> {
                           ),
                         ),
                         SizedBox(height: 12.0),
-                        Text(
-                          error,
-                          style: TextStyle(color: Colors.red, fontSize: 14.0),
-                        )
                       ],
                     ),
                   ),
+                  Text(
+                    error,
+                    style: TextStyle(color: Colors.red, fontSize: 14.0),
+                  )
                 ],
               ),
             ),

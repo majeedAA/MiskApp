@@ -5,7 +5,6 @@ import 'package:miskapp/Driver/forCurruntPage/page_of_odrer.dart';
 import 'package:miskapp/module/item.dart';
 import 'package:miskapp/module/new_order.dart';
 import 'package:miskapp/module/user.dart';
-import 'package:miskapp/service/database.dart';
 import 'package:provider/provider.dart';
 
 class PastOrderTileDriver extends StatefulWidget {
@@ -49,8 +48,6 @@ class _PastOrderTileDriverState extends State<PastOrderTileDriver> {
     dinsToMarket = sqrt(dinsToMarket);
     dinsToMarket = (dinsToMarket * 100);
     String dinsToMa = dinsToMarket.toStringAsFixed(1);
-
-    double dinsToCustomer = 0;
 
     dinsToMarket = (((customer.latitude - market.latitude) *
             (customer.latitude - market.latitude)) +

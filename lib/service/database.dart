@@ -8,6 +8,7 @@ import 'package:miskapp/module/item.dart';
 import 'package:miskapp/module/menu.dart';
 import 'package:miskapp/module/card.dart';
 import 'package:miskapp/module/new_order.dart';
+import 'package:miskapp/module/rate.dart';
 import 'package:miskapp/module/user.dart';
 
 class DatabaseService {
@@ -32,6 +33,9 @@ class DatabaseService {
 
   final CollectionReference chatCollection =
       Firestore.instance.collection('chat');
+
+  final CollectionReference rateCollection =
+      Firestore.instance.collection('rate');
 
   Future<void> updateUserData(
     String id,
@@ -68,6 +72,22 @@ class DatabaseService {
     return await userCollection.document(uid).updateData({
       'image': image,
     });
+  }
+
+  Future<void> setRate(
+    String id,
+  ) async {
+    return await rateCollection.document(id).setData(
+      {},
+    );
+  }
+
+  Future<void> updateRate(int rate, String id, String rateWhat) async {
+    return await rateCollection.document(id).setData(
+      {
+        '$rateWhat': rate,
+      },
+    );
   }
 
   Future<void> updateStateOfOrder(
@@ -204,6 +224,18 @@ class DatabaseService {
     }).toList();
   }
 
+  List<Rate> _rateListFromSnapshot(QuerySnapshot snapshot) {
+    return snapshot.documents.map((doc) {
+      //print(doc.data);
+      return Rate(
+          customerRateDriver: doc.data['customerRateDriver'] ?? 0,
+          customerRateMarket: doc.data['customerRateMarket'] ?? 0,
+          drivrtRateCustomer: doc.data['drivrtRateCustomer'] ?? 0,
+          marketRateCustomer: doc.data['marketRateCustomer'] ?? 0,
+          rateId: doc.documentID);
+    }).toList();
+  }
+
   List<Chat> _chatListFromSnapshot(QuerySnapshot snapshot) {
     return snapshot.documents.map((doc) {
       return Chat(
@@ -292,6 +324,10 @@ class DatabaseService {
     return menuCollection.snapshots().map(_menuListFromSnapshot);
   }
 
+  Stream<List<Rate>> get rate {
+    return rateCollection.snapshots().map(_rateListFromSnapshot);
+  }
+
   Stream<List<Chat>> get chats {
     return chatCollection.snapshots().map(_chatListFromSnapshot);
   }
@@ -316,6 +352,10 @@ class DatabaseService {
   // get market stream
   Stream<QuerySnapshot> get info {
     return userCollection.snapshots();
+  }
+
+  Stream<QuerySnapshot> get rates {
+    return rateCollection.snapshots();
   }
 
   Stream<QuerySnapshot> get chat {
@@ -394,9 +434,22 @@ class DatabaseService {
     );
   }
 
+  RateData _rateDataFromSnapshot(DocumentSnapshot snapshot) {
+    return RateData(
+        customerRateDriver: snapshot.data['customerRateDriver'],
+        customerRateMarket: snapshot.data['customerRateMarket'],
+        drivrtRateCustomer: snapshot.data['drivrtRateCustomer'],
+        marketRateCustomer: snapshot.data['marketRateCustomer'],
+        rateId: snapshot.documentID);
+  }
+
   // get user doc stream
   Stream<UserData> get userData {
     return userCollection.document(uid).snapshots().map(_userDataFromSnapshot);
+  }
+
+  Stream<RateData> get rateData {
+    return rateCollection.document(uid).snapshots().map(_rateDataFromSnapshot);
   }
 
   Stream<MenuData> get menuData {

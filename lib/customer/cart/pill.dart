@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:miskapp/customer/processCus/marketTile.dart';
 import 'package:miskapp/module/card.dart';
 import 'package:miskapp/module/user.dart';
 import 'package:miskapp/service/database.dart';
@@ -72,10 +73,13 @@ class _PillState extends State<Pill> {
       }
     }
 
-    driveIt ? total = total + 15 : total = total + 5;
+    var totalCost = MarketTile.dins;
+    totalCost = totalCost < 5 ? totalCost = 15 : totalCost = totalCost * 3;
+    totalCost = totalCost.ceil().toDouble();
+
+    driveIt ? total = total + totalCost : total = total + 5;
     total == 5 || total == 15 ? total = 0 : total = total;
 
-    //print(allItem.asMap());
     return Expanded(
       key: _formKey,
       child: ListView(

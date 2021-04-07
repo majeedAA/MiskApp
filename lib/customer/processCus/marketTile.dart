@@ -8,9 +8,10 @@ class MarketTile extends StatelessWidget {
   final double userLongi;
   final Item market;
   MarketTile({this.market, this.userLati, this.userLongi});
+  static double dins = 0;
   @override
   Widget build(BuildContext context) {
-    double dins = 0;
+    
     double driveCost = 0;
 
     double marketLongi = market.longitude;
