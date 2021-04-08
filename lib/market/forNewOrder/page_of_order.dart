@@ -92,15 +92,9 @@ class _PageOfOrderState extends State<PageOfOrder> {
                 FlatButton(
                   child: Text('yes'),
                   onPressed: () async {
-                    print(rate);
-                    // if (widget.order.driveIt == false) {
-                    await DatabaseService().updateRate(
+                    await DatabaseService().setRate(
                         rate, widget.order.idOfOrder, 'marketRateCustomer');
-                    // }
-                    // if (widget.order.driveIt) {
-                    //   await DatabaseService().updateWhatOfOrder(
-                    //       widget.order.idOfOrder, 'tikeIt', true);
-                    // }
+
                     Navigator.pop(context);
                   },
                 ),
@@ -154,7 +148,7 @@ class _PageOfOrderState extends State<PageOfOrder> {
                             onPressed: () => Navigator.pop(context))
                       ],
                       title: Text(
-                        'the Order',
+                        'ORDER',
                         style: TextStyle(color: Color(0xffffffff)),
                       ),
                       backgroundColor: Colors.cyan[200],

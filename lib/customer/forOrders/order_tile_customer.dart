@@ -62,7 +62,9 @@ class _OrdersOfCustomerState extends State<OrdersOfCustomer> {
       child: Container(
         color: widget.order.accept
             ? widget.order.state
-                ? Colors.green[800]
+                ? widget.order.ready
+                    ? Colors.blue[900]
+                    : Colors.green[800]
                 : Colors.grey[700]
             : Colors.red[900],
         height: 110,

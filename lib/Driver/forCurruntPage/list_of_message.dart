@@ -24,7 +24,7 @@ class _MessageOfDriverState extends State<MessageOfDriver> {
           return ListView.builder(
             itemCount: chat.length,
             itemBuilder: (conbtext, index) {
-              return chat[index].idOfChat == widget.order.idOfOrder &&
+              return chat[index].orderId == widget.order.idOfOrder &&
                           chat[index].sender == widget.order.customerId ||
                       chat[index].sender == user.uid &&
                           chat[index].receiver == widget.order.customerId ||

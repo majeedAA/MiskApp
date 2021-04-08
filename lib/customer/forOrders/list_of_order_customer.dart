@@ -18,7 +18,6 @@ class _ListOfOrdersCustomerState extends State<ListOfOrdersCustomer> {
     return StreamBuilder<UserData>(
         stream: DatabaseService(uid: user.uid).userData,
         builder: (context, snapshot) {
-          UserData userData = snapshot.data;
           return ListView.builder(
             itemCount: newOrder.length,
             itemBuilder: (conbtext, index) {

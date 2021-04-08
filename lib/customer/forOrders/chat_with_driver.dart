@@ -21,9 +21,94 @@ class _CustomerChatWithDriverState extends State<CustomerChatWithDriver> {
   final _controller = TextEditingController();
 
   String message = '';
+  int rate = 1;
 
   @override
   Widget build(BuildContext context) {
+    Future<void> openrate() async {
+      return showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text('RATE'),
+              content: SingleChildScrollView(
+                child: ListBody(
+                  children: [
+                    Center(child: Text('Please rate customer:')),
+                    Row(
+                      children: [
+                        IconButton(
+                            icon: Icon(
+                              Icons.star,
+                              color: Colors.orange,
+                            ),
+                            onPressed: () {
+                              rate = 1;
+                            }),
+                        IconButton(
+                            icon: Icon(
+                              Icons.star,
+                              color: Colors.orange,
+                            ),
+                            onPressed: () {
+                              rate = 2;
+                            }),
+                        IconButton(
+                            icon: Icon(
+                              Icons.star,
+                              color: Colors.orange,
+                            ),
+                            onPressed: () {
+                              rate = 3;
+                            }),
+                        IconButton(
+                            icon: Icon(
+                              Icons.star,
+                              color: Colors.orange,
+                            ),
+                            onPressed: () {
+                              rate = 4;
+                            }),
+                        IconButton(
+                            icon: Icon(
+                              Icons.star,
+                              color: Colors.orange,
+                            ),
+                            onPressed: () {
+                              rate = 5;
+                            }),
+                      ],
+                    )
+                  ],
+                ),
+              ),
+              actions: [
+                FlatButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: Text('No')),
+                FlatButton(
+                  child: Text('yes'),
+                  onPressed: () async {
+                    print(rate);
+                    // if (widget.order.driveIt == false) {
+                    await DatabaseService().updateRate(
+                        rate, widget.order.idOfOrder, 'customerRateDriver');
+                    // }
+                    // if (widget.order.driveIt) {
+                    //   await DatabaseService().updateWhatOfOrder(
+                    //       widget.order.idOfOrder, 'tikeIt', true);
+                    // }
+                    Navigator.pop(context);
+                  },
+                ),
+              ],
+            );
+          });
+    }
+
     final user = Provider.of<User>(context);
     return StreamProvider<List<Item>>.value(
         value: DatabaseService().items,
@@ -37,6 +122,22 @@ class _CustomerChatWithDriverState extends State<CustomerChatWithDriver> {
                     backgroundColor: Colors.indigo[50],
                     appBar: AppBar(
                       actions: [
+                        IconButton(
+                            icon: Icon(
+                              Icons.star,
+                              color: Colors.blue[50],
+                            ),
+                            onPressed: () {
+                              openrate();
+                              // Navigator.push(
+                              //   context,
+                              //   MaterialPageRoute(
+                              //       builder: (BuildContext context) =>
+                              //           MessageOfMarket(
+                              //             order: order,
+                              //           )),
+                              // );
+                            }),
                         IconButton(
                             icon: Icon(Icons.arrow_forward_ios_rounded),
                             onPressed: () => Navigator.pop(context))

@@ -74,11 +74,11 @@ class DatabaseService {
     });
   }
 
-  Future<void> setRate(
-    String id,
-  ) async {
+  Future<void> setRate(int rate, String id, String rateWhat) async {
     return await rateCollection.document(id).setData(
-      {},
+      {
+        '$rateWhat': rate,
+      },
     );
   }
 

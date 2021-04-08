@@ -57,8 +57,24 @@ class _PillState extends State<Pill> {
         total += itemOfCustomer[i].totalprice;
         idMarket = itemOfCustomer[i].idMarket;
         allItem.add(itemOfCustomer[i].nameOfItem);
+      }
+    }
+
+    for (var i = 0; i < itemOfCustomer.length; i++) {
+      idMarket = itemOfCustomer[0].idMarket;
+      if (itemOfCustomer[0].idMarket == itemOfCustomer[i].idMarket) {
         allItem.add(itemOfCustomer[i].price);
+      }
+    }
+    for (var i = 0; i < itemOfCustomer.length; i++) {
+      idMarket = itemOfCustomer[0].idMarket;
+      if (itemOfCustomer[0].idMarket == itemOfCustomer[i].idMarket) {
         allItem.add(itemOfCustomer[i].quantity);
+      }
+    }
+    for (var i = 0; i < itemOfCustomer.length; i++) {
+      idMarket = itemOfCustomer[0].idMarket;
+      if (itemOfCustomer[0].idMarket == itemOfCustomer[i].idMarket) {
         allItem.add(itemOfCustomer[i].totalprice);
       }
     }

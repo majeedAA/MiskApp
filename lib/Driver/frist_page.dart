@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:miskapp/Driver/current_page.dart';
 import 'package:miskapp/Driver/cuttent_page.dart';
-import 'package:miskapp/Driver/notifications.dart';
-import 'package:miskapp/Driver/past_page.dart';
+import 'package:miskapp/Driver/past_orser.dart';
 import 'package:miskapp/market/accountMarket.dart';
 
 class FristPageOfDriver extends StatefulWidget {
@@ -13,8 +13,8 @@ class _FristPageOfDriverState extends State<FristPageOfDriver> {
   int _curruntIndex = 3;
   List<Widget> _widgetOption = <Widget>[
     AccountMarket(),
-    Notifications(),
-    PastOrders(),
+    PastOrder(),
+    CurrentOrders(),
     CurrentOrder(),
   ];
   @override
@@ -32,18 +32,18 @@ class _FristPageOfDriverState extends State<FristPageOfDriver> {
             backgroundColor: Colors.cyanAccent[700],
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.fiber_new),
-            title: Text('Notificaition'),
+            icon: Icon(Icons.playlist_add_check_outlined),
+            title: Text('Past order'),
             backgroundColor: Colors.cyan[600],
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.drive_eta_outlined),
-            title: Text('Past order'),
+            title: Text('current order'),
             backgroundColor: Colors.cyan[400],
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.drive_eta),
-            title: Text('current order'),
+            title: Text('new order'),
             backgroundColor: Colors.cyanAccent[400],
           ),
         ],

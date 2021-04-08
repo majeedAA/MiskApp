@@ -5,12 +5,13 @@ import 'package:miskapp/module/user.dart';
 import 'package:miskapp/service/database.dart';
 import 'package:provider/provider.dart';
 
-class ListOfPastOrderDriver extends StatefulWidget {
+class ListOfCurrentOrdersDriver extends StatefulWidget {
   @override
-  _ListOfPastOrderDriverState createState() => _ListOfPastOrderDriverState();
+  _ListOfCurrentOrdersDriverState createState() =>
+      _ListOfCurrentOrdersDriverState();
 }
 
-class _ListOfPastOrderDriverState extends State<ListOfPastOrderDriver> {
+class _ListOfCurrentOrdersDriverState extends State<ListOfCurrentOrdersDriver> {
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<User>(context);
@@ -23,7 +24,7 @@ class _ListOfPastOrderDriverState extends State<ListOfPastOrderDriver> {
             itemBuilder: (conbtext, index) {
               return newOrder[index].toDriver &&
                       newOrder[index].tikeIt &&
-                      !newOrder[index].state &&
+                      newOrder[index].state &&
                       newOrder[index].driveIt == true &&
                       newOrder[index].driverId == user.uid
                   ? PastOrderTileDriver(

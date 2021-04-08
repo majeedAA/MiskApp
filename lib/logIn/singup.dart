@@ -58,8 +58,8 @@ class _RegesterState extends State<Regester> {
             ),
             body: Form(
               key: _formKey,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
+              child: ListView(
+                // crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
                   SizedBox(
                     height: 100,
@@ -81,18 +81,21 @@ class _RegesterState extends State<Regester> {
                     ),
                   ),
                   SizedBox(height: 10.0),
-                  DropdownButtonFormField(
-                    value: 'Riyadh',
-                    decoration: InputDecoration(
-                      labelText: 'City',
+                  Container(
+                    margin: EdgeInsets.symmetric(horizontal: 10),
+                    child: DropdownButtonFormField(
+                      value: 'Riyadh',
+                      decoration: InputDecoration(
+                        labelText: 'City',
+                      ),
+                      items: cities.map((city) {
+                        return DropdownMenuItem(
+                          value: city,
+                          child: Text(city),
+                        );
+                      }).toList(),
+                      onChanged: (val) => setState(() => sity = val),
                     ),
-                    items: cities.map((city) {
-                      return DropdownMenuItem(
-                        value: city,
-                        child: Text(city),
-                      );
-                    }).toList(),
-                    onChanged: (val) => setState(() => sity = val),
                   ),
                   SizedBox(height: 10.0),
                   Container(

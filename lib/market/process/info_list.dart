@@ -1,9 +1,11 @@
 //import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:miskapp/module/item.dart';
 import 'package:miskapp/module/user.dart';
 import 'package:miskapp/service/auth.dart';
 import 'package:miskapp/service/database.dart';
 import 'package:provider/provider.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ItemList extends StatefulWidget {
   @override
@@ -41,11 +43,27 @@ class _ItemListState extends State<ItemList> {
     final AuthService _auth = AuthService();
     final _width = MediaQuery.of(context).size.width;
     final _height = MediaQuery.of(context).size.height;
+    String email = '';
+    String phone = '';
+    String city = '';
+    String name = '';
+    String image = '';
+
+    final users = Provider.of<List<Item>>(context) ?? [];
+
+    for (var i = 0; i < users.length; i++) {
+      if (users[i].id == user.uid) {
+        email = users[i].email;
+        phone = users[i].phone.toString();
+        city = users[i].sity;
+        name = users[i].name;
+        image = users[i].image;
+      }
+    }
 
     return StreamBuilder<UserData>(
         stream: DatabaseService(uid: user.uid).userData,
         builder: (context, snapshot) {
-          UserData userData = snapshot.data;
           return Container(
             child: new Stack(
               children: <Widget>[
@@ -93,7 +111,7 @@ class _ItemListState extends State<ItemList> {
                                   height: _height / 30,
                                 ),
                                 new Text(
-                                  userData.name ?? '',
+                                  name ?? '',
                                   style: new TextStyle(
                                       fontSize: 18.0,
                                       color: Colors.white,
@@ -104,17 +122,17 @@ class _ItemListState extends State<ItemList> {
                           ),
                         ),
                         new Padding(
-                          padding: new EdgeInsets.only(top: _height / 2.2),
+                          padding: new EdgeInsets.only(top: _height / 2.5),
                           child: new Container(
                             color: Colors.white,
                           ),
                         ),
                         new Padding(
                           padding: new EdgeInsets.only(
-                              top: _height / 2.6,
+                              top: _height / 2.9,
                               left: _width / 20,
                               right: _width / 20),
-                          child: new Column(
+                          child: new ListView(
                             children: <Widget>[
                               SizedBox(
                                 height: 30,
@@ -123,23 +141,30 @@ class _ItemListState extends State<ItemList> {
                                 padding: new EdgeInsets.only(top: _height / 20),
                                 child: new Column(
                                   children: <Widget>[
-                                    infoChild(_width, Icons.email,
-                                        userData.email ?? ''),
+                                    infoChild(_width, Icons.email, email ?? ''),
                                     SizedBox(
-                                      height: 10,
+                                      height: 5,
                                     ),
-                                    infoChild(_width, Icons.call,
-                                        userData.phone.toString() ?? ''),
+                                    infoChild(_width, Icons.call, phone ?? ''),
                                     SizedBox(
-                                      height: 10,
+                                      height: 5,
                                     ),
-                                    infoChild(_width, Icons.location_city,
-                                        userData.sity ?? ''),
+                                    infoChild(
+                                        _width,
+                                        FontAwesomeIcons.globeAfrica,
+                                        city ?? ''),
                                     SizedBox(
-                                      height: 10,
+                                      height: 5,
                                     ),
-                                    infoChild(_width, Icons.chat_bubble,
-                                        'Show all comments'),
+                                    Text(
+                                        '_________________________________                        '),
+                                    infoChild(_width, FontAwesomeIcons.headset,
+                                        'Contact us via info@misk.com'),
+                                    SizedBox(
+                                      height: 5,
+                                    ),
+                                    infoChild(_width, FontAwesomeIcons.twitter,
+                                        '@miskApp'),
                                     new Padding(
                                       padding: new EdgeInsets.only(
                                           top: _height / 30),

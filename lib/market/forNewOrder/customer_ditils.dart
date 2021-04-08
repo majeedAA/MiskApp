@@ -51,19 +51,20 @@ class _CustomerDitilsState extends State<CustomerDitils> {
         });
   }
 
+  Color colorOfReady = Colors.black;
+
   @override
   Widget build(BuildContext newcontext) {
     String name = '';
-    double lati = 0;
-    double long = 0;
     int phone = 0;
+    if (widget.order.ready || widget.order.toDriver) {
+      colorOfReady = Colors.green[900];
+    }
     final customer = Provider.of<List<Item>>(newcontext) ?? [];
     for (var i = 0; i < customer.length; i++) {
       if (widget.order.customerId == customer[i].id) {
         name = customer[i].name;
         phone = customer[i].phone;
-        lati = customer[i].latitude;
-        long = customer[i].longitude;
         break;
       }
     }
@@ -77,7 +78,7 @@ class _CustomerDitilsState extends State<CustomerDitils> {
           ),
           Icon(
             Icons.account_circle_outlined,
-            color: Colors.blue,
+            color: Colors.blue[700],
           ),
           SizedBox(
             width: 10,
@@ -86,7 +87,10 @@ class _CustomerDitilsState extends State<CustomerDitils> {
           SizedBox(
             width: 40,
           ),
-          Icon(Icons.phone),
+          Icon(
+            Icons.phone,
+            color: Colors.blue[700],
+          ),
           SizedBox(
             width: 10,
           ),
@@ -101,8 +105,8 @@ class _CustomerDitilsState extends State<CustomerDitils> {
           GestureDetector(
             child: Text(
               'ready',
-              style: TextStyle(
-                  color: Colors.green[900], fontWeight: FontWeight.w800),
+              style:
+                  TextStyle(color: colorOfReady, fontWeight: FontWeight.w800),
             ),
             onTap: () async {
               if (widget.order.driveIt) {
