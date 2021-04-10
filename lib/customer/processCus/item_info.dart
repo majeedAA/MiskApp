@@ -31,12 +31,19 @@ class ItemInfo extends StatelessWidget {
           margin: EdgeInsets.fromLTRB(20.0, 6.0, 20.0, 0.0),
           child: ListTile(
             leading: CircleAvatar(
-              // child: menu.image != '' ? Image.network(menu.image) : Container(),
-              radius: 25.0,
-              backgroundColor: Colors.brown[100],
+              radius: 25,
+              child: ClipOval(
+                child: SizedBox(
+                  width: 300,
+                  height: 3000,
+                  child: menu.image.isEmpty
+                      ? Container()
+                      : Image.network(menu.image ?? ''),
+                ),
+              ),
             ),
             title: Text(menu.name),
-            subtitle: Text('Takes ${menu.price} Price'),
+            subtitle: Text('Takes ${menu.price} Price\n1 ${menu.unit}'),
           ),
         ),
       ),

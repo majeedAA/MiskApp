@@ -14,17 +14,17 @@ class WaitPage extends StatelessWidget {
             SizedBox(
               height: 20,
             ),
-            // Container(
-            //   margin: EdgeInsets.all(10),
-            //   child: Image(
-            //     image: AssetImage('assets/Misk.PNG'),
-            //   ),
-            // ),
+            Container(
+              margin: EdgeInsets.all(10),
+              child: Image(
+                image: AssetImage('assets/Misk.PNG'),
+              ),
+            ),
             SizedBox(
               height: 50,
             ),
             Text(
-              'Thanks for Register in Misk App :)',
+              'Thanks for Registering in Misk:)',
               style: TextStyle(
                   fontSize: 25,
                   fontWeight: FontWeight.bold,

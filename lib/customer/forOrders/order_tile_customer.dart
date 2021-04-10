@@ -20,13 +20,14 @@ class _OrdersOfCustomerState extends State<OrdersOfCustomer> {
   String marketName = '';
   Item market;
   Item customer;
+  String customerId;
   @override
   Widget build(BuildContext context) {
     String time =
         widget.order.time.isEmpty ? 'Any Time' : widget.order.time.toString();
 
     String orederWith = widget.order.tikeIt ? 'with Driver' : 'with market';
-    driveIt = widget.order.driveIt ? 'drive' : 'bickUp';
+    driveIt = widget.order.driveIt ? 'Delivery' : 'PickUp';
     final users = Provider.of<List<Item>>(context) ?? [];
 
     for (var i = 0; i < users.length; i++) {
@@ -38,6 +39,8 @@ class _OrdersOfCustomerState extends State<OrdersOfCustomer> {
         customer = users[i];
       }
     }
+    customerId =
+        widget.order.customerId.substring(widget.order.customerId.length - 6);
     return GestureDetector(
       onTap: () {
         if (widget.order.tikeIt) {
@@ -80,7 +83,7 @@ class _OrdersOfCustomerState extends State<OrdersOfCustomer> {
                   style: TextStyle(fontWeight: FontWeight.w600),
                 ),
                 subtitle: Text(
-                    '${widget.order.total}SAR \n$driveIt $time \n$orederWith'),
+                    '${widget.order.total}SAR \n$driveIt $time \n$orederWith\nID of order: $customerId'),
               ),
             ],
           ),

@@ -19,7 +19,6 @@ class _ListOfLastOrderMarketState extends State<ListOfLastOrderMarket> {
     return StreamBuilder<UserData>(
         stream: DatabaseService(uid: user.uid).userData,
         builder: (context, snapshot) {
-          UserData userData = snapshot.data;
           return ListView.builder(
             itemCount: newOrder.length,
             itemBuilder: (conbtext, index) {

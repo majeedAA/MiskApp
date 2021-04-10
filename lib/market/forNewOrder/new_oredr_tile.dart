@@ -25,7 +25,7 @@ class _NewOrderMarketTileState extends State<NewOrderMarketTile> {
 
   @override
   Widget build(BuildContext context) {
-    driveIt = widget.order.driveIt ? 'drive' : 'bickUp';
+    driveIt = widget.order.driveIt ? 'Delivery' : 'PickUp';
 
     cusrmerID =
         widget.order.customerId.substring(widget.order.customerId.length - 6);

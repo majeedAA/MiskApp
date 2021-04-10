@@ -109,7 +109,7 @@ class _PastOrderTileDriverState extends State<PastOrderTileDriver> {
                     child: FlatButton.icon(
                         onPressed: () async {
                           var mapSchema =
-                              'geo:${market.latitude},${market.longitude}';
+                              'https://www.google.com/maps/search/?api=1&query=${market.latitude},${market.longitude}';
                           if (await canLaunch(mapSchema)) {
                             await launch(mapSchema);
                           } else {
@@ -129,8 +129,13 @@ class _PastOrderTileDriverState extends State<PastOrderTileDriver> {
                     visible: widget.order.tikeIt,
                     child: FlatButton.icon(
                         onPressed: () async {
-                          // await DatabaseService().updateStateOfOrder(
-                          //     widget.order.idOfOrder, widget.order.state);
+                          var mapSchema =
+                              'https://www.google.com/maps/search/?api=1&query=${customer.latitude},${customer.longitude}';
+                          if (await canLaunch(mapSchema)) {
+                            await launch(mapSchema);
+                          } else {
+                            throw 'Could not launch $mapSchema';
+                          }
                         },
                         icon: Icon(Icons.location_on_outlined,
                             color: Colors.cyan[600]),

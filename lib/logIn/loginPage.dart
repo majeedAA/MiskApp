@@ -13,7 +13,6 @@ class HomePage extends StatelessWidget {
       home: Home(),
       routes: {
         '/SingUp': (context) => SingUp(),
-        '/Forget': (context) => ForgetPassword(),
         '/Login': (context) => Login(),
       },
     );
@@ -119,7 +118,7 @@ class _State extends State<Home> {
                                       setState(() {
                                         loading = false;
                                         error =
-                                            'Could not sign in with those credentials';
+                                            'The username or password you provided is incorrect. Please try again.';
                                       });
                                     }
                                   }
@@ -138,7 +137,13 @@ class _State extends State<Home> {
                                 borderRadius: BorderRadius.circular(5.0),
                               ),
                               onPressed: () {
-                                Navigator.pushNamed(context, '/Forget');
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (BuildContext context) =>
+                                        ForgetPassword(),
+                                  ),
+                                );
                               },
                             ),
                           ),

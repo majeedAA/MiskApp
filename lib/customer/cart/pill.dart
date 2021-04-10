@@ -15,9 +15,9 @@ class _PillState extends State<Pill> {
   final _formKey = GlobalKey<FormState>();
 
   final List<String> pays = [
-    'cash',
+    'Cash',
     'mada',
-    'appel Pay',
+    'Apple Pay',
     'Visa',
   ];
   String idMarket = '';
@@ -107,7 +107,6 @@ class _PillState extends State<Pill> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
                 TextFormField(
-                  //validator: (val) => val.isEmpty ? val = 'nothing' : null,
                   initialValue: '',
                   cursorColor: Colors.black,
                   decoration: InputDecoration(
@@ -126,7 +125,7 @@ class _PillState extends State<Pill> {
                 Row(
                   children: [
                     Text(
-                      driveIt ? 'total with drive: ' : 'total with bickup: ',
+                      driveIt ? 'total with Delivery: ' : 'total with Pickup: ',
                       style:
                           TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
@@ -140,7 +139,7 @@ class _PillState extends State<Pill> {
                   height: 20,
                 ),
                 DropdownButtonFormField(
-                  value: 'cash',
+                  value: 'Cash',
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'Pay by',

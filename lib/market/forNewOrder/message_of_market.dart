@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:miskapp/market/forNewOrder/list_of_message.dart';
-import 'package:miskapp/market/forNewOrder/message_tile_market.dart';
 import 'package:miskapp/module/chat.dart';
 import 'package:miskapp/module/item.dart';
 import 'package:miskapp/module/new_order.dart';
@@ -114,14 +113,3 @@ class _MessageOfMarketState extends State<MessageOfMarket> {
             }));
   }
 }
-
-// StreamProvider<List<Chat>>.value(
-//         value: DatabaseService().chats,
-//         builder: (context, snapshot) {
-//           return Scaffold(
-//             appBar: AppBar(
-//               title: Text('Chat'),
-//             ),
-
-//           );
-//         });

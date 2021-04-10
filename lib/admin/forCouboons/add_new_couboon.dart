@@ -26,7 +26,7 @@ class AddNewCouboon extends StatelessWidget {
               margin: EdgeInsets.symmetric(horizontal: 70, vertical: 10),
               child: FloatingActionButton(
                   backgroundColor: Colors.indigo[700],
-                  child: Text("Add couboon"),
+                  child: Text("Add coupon"),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0),
                   ),

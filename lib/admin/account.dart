@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:miskapp/admin/forCouboons/couboons_page.dart';
+import 'package:miskapp/admin/process/rate_list.dart';
 import 'package:miskapp/service/auth.dart';
 
 class AccountOfAdmin extends StatelessWidget {
@@ -7,12 +9,30 @@ class AccountOfAdmin extends StatelessWidget {
   Widget build(BuildContext context) {
     final AuthService _auth = AuthService();
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text('Account'),
+        title: Text(
+          '',
+          style: TextStyle(color: Colors.black),
+        ),
+        backgroundColor: Colors.white,
       ),
       body: Container(
         child: Column(
           children: [
+            SizedBox(
+              height: 50,
+            ),
+            Container(
+              // color: Colors.black,
+              width: 100,
+              child: Text(
+                '',
+              ),
+            ),
+            // SizedBox(
+            //   height: 30,
+            // ),
             Row(
               children: [
                 Expanded(
@@ -21,13 +41,25 @@ class AccountOfAdmin extends StatelessWidget {
                     margin: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
                     child: new FloatingActionButton(
                       heroTag: "btn1",
-                      backgroundColor: Color(0xff289672),
-                      child: Text(
-                        "Couboons",
-                        style: TextStyle(
-                          fontSize: 20,
-                        ),
-                        textAlign: TextAlign.center,
+                      backgroundColor: Colors.deepPurple[600],
+                      child: Row(
+                        children: [
+                          SizedBox(
+                            width: 150,
+                          ),
+                          Icon(
+                            FontAwesomeIcons.tag,
+                          ),
+                          SizedBox(
+                            width: 20,
+                          ),
+                          Text(
+                            "coupon",
+                            style: TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.bold),
+                            textAlign: TextAlign.center,
+                          ),
+                        ],
                       ),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(35.0),
@@ -43,27 +75,6 @@ class AccountOfAdmin extends StatelessWidget {
                     ),
                   ),
                 ),
-                Expanded(
-                  child: Container(
-                    height: 150,
-                    margin: EdgeInsets.all(15),
-                    child: new FloatingActionButton(
-                      heroTag: "btn2",
-                      backgroundColor: Color(0xff1e6f5c),
-                      child: Text(
-                        "nothing know",
-                        style: TextStyle(
-                          fontSize: 20,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(35.0),
-                      ),
-                      onPressed: () {},
-                    ),
-                  ),
-                ),
               ],
             ),
             Row(
@@ -73,10 +84,10 @@ class AccountOfAdmin extends StatelessWidget {
                     height: 150,
                     margin: EdgeInsets.all(15),
                     child: new FloatingActionButton(
-                      heroTag: "btn3",
-                      backgroundColor: Color(0xff1e6f5c),
+                      heroTag: "btn2",
+                      backgroundColor: Colors.deepPurple[300],
                       child: Text(
-                        "Contact with users",
+                        "All rates",
                         style: TextStyle(
                           fontSize: 20,
                         ),
@@ -85,14 +96,23 @@ class AccountOfAdmin extends StatelessWidget {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(35.0),
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (BuildContext context) =>
+                                PageOfRateAdmin(),
+                          ),
+                        );
+                      },
                     ),
                   ),
                 ),
               ],
             ),
+
             SizedBox(
-              height: 200,
+              height: 50,
             ),
             Row(
               children: [
@@ -102,7 +122,7 @@ class AccountOfAdmin extends StatelessWidget {
                     margin: EdgeInsets.symmetric(horizontal: 100),
                     child: new FloatingActionButton(
                       heroTag: "btn4",
-                      backgroundColor: Colors.teal[900],
+                      backgroundColor: Colors.amber[200],
                       child: Text(
                         "Logout",
                         style: TextStyle(

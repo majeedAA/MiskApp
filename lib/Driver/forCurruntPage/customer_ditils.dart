@@ -24,7 +24,7 @@ class _CustomerDitilsDriverState extends State<CustomerDitilsDriver> {
               title: Text('End Order'),
               content: SingleChildScrollView(
                 child: ListBody(
-                  children: [Text('are you sure for End the order?')],
+                  children: [Text('are you sure you want to end the order?')],
                 ),
               ),
               actions: [
@@ -65,63 +65,65 @@ class _CustomerDitilsDriverState extends State<CustomerDitilsDriver> {
     return Container(
       color: Colors.white,
       height: 60,
-      child: Row(
-        children: [
-          SizedBox(
-            width: 10,
-          ),
-          Icon(
-            Icons.account_circle_outlined,
-            color: Colors.blue,
-          ),
-          SizedBox(
-            width: 10,
-          ),
-          Text(name),
-          SizedBox(
-            width: 40,
-          ),
-          Icon(Icons.phone),
-          SizedBox(
-            width: 10,
-          ),
-          Text(phone.toString()),
-          SizedBox(
-            width: 25,
-          ),
-          Text('|'),
-          SizedBox(
-            width: 13,
-          ),
-          GestureDetector(
-            child: Text(
-              'Tick it',
-              style: TextStyle(
-                  color: Colors.green[900], fontWeight: FontWeight.w800),
+      child: Expanded(
+        child: Row(
+          children: [
+            // SizedBox(
+            //   width: 10,
+            // ),
+            Icon(
+              Icons.account_circle_outlined,
+              color: Colors.blue,
             ),
-            onTap: () async {
-              await DatabaseService().updateWhatOfOrder(
-                  widget.order.idOfOrder, 'tikeItDriver', true);
-            },
-          ),
-          SizedBox(
-            width: 20,
-          ),
-          Text('|'),
-          SizedBox(
-            width: 20,
-          ),
-          GestureDetector(
-            child: Text(
-              'Done',
-              style: TextStyle(
-                  color: Colors.blueGrey[900], fontWeight: FontWeight.w800),
+            // SizedBox(
+            //   width: 10,
+            // ),
+            Text(name),
+            // SizedBox(
+            //   width: 40,
+            // ),
+            Icon(Icons.phone),
+            // SizedBox(
+            //   width: 10,
+            // ),
+            Text(phone.toString()),
+            // SizedBox(
+            //   width: 25,
+            // ),
+            Text('|'),
+            // SizedBox(
+            //   width: 13,
+            // ),
+            GestureDetector(
+              child: Text(
+                'Take it',
+                style: TextStyle(
+                    color: Colors.green[900], fontWeight: FontWeight.w800),
+              ),
+              onTap: () async {
+                await DatabaseService().updateWhatOfOrder(
+                    widget.order.idOfOrder, 'tikeItDriver', true);
+              },
             ),
-            onTap: () {
-              openAlart();
-            },
-          )
-        ],
+            // SizedBox(
+            //   width: 20,
+            // ),
+            Text('|'),
+            // SizedBox(
+            //   width: 20,
+            // ),
+            GestureDetector(
+              child: Text(
+                'Done',
+                style: TextStyle(
+                    color: Colors.blueGrey[900], fontWeight: FontWeight.w800),
+              ),
+              onTap: () {
+                openAlart();
+              },
+            )
+          ],
+        ),
       ),
     );
   }

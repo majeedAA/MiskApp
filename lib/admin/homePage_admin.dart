@@ -14,7 +14,7 @@ class HomePageOfAdmin extends StatelessWidget {
             appBar: AppBar(
               actions: <Widget>[],
               title: Text(
-                'MISK Admin HomePage',
+                'Customer\s page',
                 style: TextStyle(color: Color(0xffffffff)),
               ),
               backgroundColor: Colors.blue[300],

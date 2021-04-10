@@ -6,7 +6,7 @@ class BastOrderOfMarket extends StatelessWidget {
   BastOrderOfMarket({this.order});
   @override
   Widget build(BuildContext context) {
-    String driveIt = order.driveIt ? 'drive' : 'bickUp';
+    String driveIt = order.driveIt ? 'Delivery' : 'PickUp';
     String cusrmerID = order.customerId.substring(order.customerId.length - 6);
     return Container(
       color: Colors.red[300],
@@ -18,9 +18,7 @@ class BastOrderOfMarket extends StatelessWidget {
         child: Column(
           children: [
             ListTile(
-              // leading: FlatButton.icon(
-              //     onPressed: () {}, icon: Icon(Icons.ac_unit), label: Text('')),
-              title: Text('New order by $cusrmerID'),
+              title: Text('Past order by $cusrmerID'),
               subtitle: Text('${order.total}SAR \n$driveIt ${order.time} '),
             ),
           ],

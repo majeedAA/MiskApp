@@ -50,7 +50,7 @@ class CardCustomerTile extends StatelessWidget {
               card.price.toString() +
               ' \nQuantity: ' +
               card.quantity.toString() +
-              ' \nTotal preice: ' +
+              ' \nTotal price: ' +
               card.totalprice.toString() +
               ' SAR '),
         ),

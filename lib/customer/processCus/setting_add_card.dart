@@ -68,7 +68,6 @@ class _SittingAddToCardState extends State<SittingAddToCard> {
             initialValue: 'Quantity',
             decoration: InputDecoration(
               border: InputBorder.none,
-              //labelText: 'Name',
             ),
           ),
           Container(
@@ -88,7 +87,6 @@ class _SittingAddToCardState extends State<SittingAddToCard> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(5.0),
                     ),
-                    // color: Colors.blueGrey[50],
                     onPressed: () {
                       setState(() {
                         if (_count <= 1) {
@@ -105,7 +103,6 @@ class _SittingAddToCardState extends State<SittingAddToCard> {
                 ),
                 Expanded(
                   child: FlatButton.icon(
-                    // color: Colors.blueGrey[50],
                     onPressed: () {
                       setState(() {
                         _count++;

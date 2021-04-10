@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'loginPage.dart';
-import 'check_code.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class ForgetPassword extends StatefulWidget {
 // This widget is the root of your application.
@@ -23,6 +22,8 @@ class Forget extends StatefulWidget {
 }
 
 class _ForgetState extends State<Forget> {
+  String _email = '';
+  final auth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,8 +47,11 @@ class _ForgetState extends State<Forget> {
                 obscureText: false,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
-                  labelText: 'Phone Number',
+                  labelText: 'Emsil',
                 ),
+                onChanged: (val) {
+                  _email = val;
+                },
               ),
             ),
             Container(
@@ -64,36 +68,10 @@ class _ForgetState extends State<Forget> {
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(5.0),
                         ),
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (BuildContext context) => CheckCode(),
-                            ),
-                          );
-                        },
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: Container(
-                      margin:
-                          EdgeInsets.symmetric(horizontal: 7.0, vertical: 10),
-                      child: new FloatingActionButton(
-                        heroTag: "btn2",
-                        backgroundColor: Color(0xff515c5e),
-                        child: Text("Back"),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(5.0),
-                        ),
-                        onPressed: () {
-                          // Navigator.pop(context, true);
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (BuildContext context) => HomePage(),
-                            ),
-                          );
+                        onPressed: () async {
+                          await auth.sendPasswordResetEmail(email: _email);
+
+                          Navigator.of(context).pop();
                         },
                       ),
                     ),

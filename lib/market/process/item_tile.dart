@@ -60,7 +60,6 @@ class MenuTile extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 8.0),
       child: Card(
-        //margin: EdgeInsets.fromLTRB(20.0, 6.0, 20.0, 0.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -78,15 +77,15 @@ class MenuTile extends StatelessWidget {
               leading: CircleAvatar(
                 radius: 25.0,
                 backgroundColor: Colors.brown[100],
-                // child: ClipOval(
-                //   child: SizedBox(
-                //     width: 300,
-                //     height: 3000,
-                //     // child: menu.image == '' || menu.image == null
-                //     //     ? Image.network(defoltImage)
-                //     //     : Image.network(menu.image),
-                //   ),
-                // ),
+                child: ClipOval(
+                  child: SizedBox(
+                    width: 300,
+                    height: 3000,
+                    child: menu.image == ''
+                        ? Container()
+                        : Image.network(menu.image),
+                  ),
+                ),
               ),
               title: Text(menu.name),
               subtitle: Text('Takes ${menu.price} Price'),

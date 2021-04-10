@@ -25,7 +25,7 @@ class _NotificationState extends State<Notification> {
           return Scaffold(
             appBar: AppBar(
               title: Text(
-                'MISK Bast orders',
+                'Past orders',
                 style: TextStyle(color: Color(0xffffffff)),
               ),
               backgroundColor: Color(0xffbabbbb),

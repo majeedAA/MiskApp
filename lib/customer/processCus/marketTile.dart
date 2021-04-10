@@ -11,7 +11,6 @@ class MarketTile extends StatelessWidget {
   static double dins = 0;
   @override
   Widget build(BuildContext context) {
-    
     double driveCost = 0;
 
     double marketLongi = market.longitude;
@@ -40,8 +39,16 @@ class MarketTile extends StatelessWidget {
           margin: EdgeInsets.fromLTRB(20.0, 6.0, 20.0, 0.0),
           child: ListTile(
             leading: CircleAvatar(
-              radius: 25.0,
-              backgroundColor: Colors.greenAccent[100],
+              radius: 25,
+              child: ClipOval(
+                child: SizedBox(
+                  width: 300,
+                  height: 3000,
+                  child: market.image.isEmpty
+                      ? Container()
+                      : Image.network(market.image ?? ''),
+                ),
+              ),
             ),
             title: Text(market.name),
             subtitle: Text(

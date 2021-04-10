@@ -1,5 +1,7 @@
-//import 'dart:io';
+import 'dart:io';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:miskapp/module/item.dart';
 import 'package:miskapp/module/user.dart';
 import 'package:miskapp/service/auth.dart';
@@ -13,7 +15,7 @@ class ItemList extends StatefulWidget {
 }
 
 class _ItemListState extends State<ItemList> {
-  //File _image;
+  File _image;
   String theImage = '';
   String defoltImage =
       'https://cdn.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png';
@@ -21,24 +23,24 @@ class _ItemListState extends State<ItemList> {
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<User>(context);
-    // Future getImage() async {
-    //   var image = await ImagePicker.pickImage(source: ImageSource.gallery);
+    Future getImage() async {
+      var image = await ImagePicker.pickImage(source: ImageSource.gallery);
 
-    //   if (image != null) {
-    //     _image = File(image.path);
-    //     String fileName = basename(_image.path);
-    //     StorageReference firebaseStorgeRef =
-    //         FirebaseStorage.instance.ref().child(fileName);
-    //     StorageUploadTask uploadTask = firebaseStorgeRef.putFile(_image);
-    //     var dowurl = await (await uploadTask.onComplete).ref.getDownloadURL();
-    //     var url = dowurl.toString();
-    //     theImage = url;
-    //     DatabaseService(uid: user.uid).updateImageUserData(theImage);
-    //     print('done');
-    //   } else {
-    //     print('No image selected.');
-    //   }
-    // }
+      if (image != null) {
+        _image = File(image.path);
+        String fileName = _image.path.split('/').last;
+        StorageReference firebaseStorgeRef =
+            FirebaseStorage.instance.ref().child(fileName);
+        StorageUploadTask uploadTask = firebaseStorgeRef.putFile(_image);
+        var dowurl = await (await uploadTask.onComplete).ref.getDownloadURL();
+        var url = dowurl.toString();
+        theImage = url;
+        DatabaseService(uid: user.uid).updateImageUserData(theImage);
+        print('done');
+      } else {
+        print('No image selected.');
+      }
+    }
 
     final AuthService _auth = AuthService();
     final _width = MediaQuery.of(context).size.width;
@@ -87,24 +89,21 @@ class _ItemListState extends State<ItemList> {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: <Widget>[
                                 new CircleAvatar(
-                                  //   backgroundImage:  //     new AssetImage('assets/profile_img.jpeg'),
                                   radius: _height / 10,
-                                  //   backgroundImage: ,
                                   child: ClipOval(
                                     child: SizedBox(
                                       width: 300,
                                       height: 3000,
-                                      // child: userData.image == '' ||
-                                      //         userData.image == null
-                                      //     ? Image.network(defoltImage ?? '')
-                                      //     : Image.network(userData.image ?? ''),
+                                      child: image == ''
+                                          ? Image.network(defoltImage ?? '')
+                                          : Image.network(image ?? ''),
                                     ),
                                   ),
                                 ),
                                 IconButton(
                                   icon: Icon(Icons.camera),
                                   onPressed: () {
-                                    // getImage();
+                                    getImage();
                                   },
                                 ),
                                 new SizedBox(

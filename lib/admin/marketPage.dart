@@ -14,7 +14,7 @@ class MarketPageOfAdmin extends StatelessWidget {
             appBar: AppBar(
               actions: <Widget>[],
               title: Text(
-                'Page of Market',
+                'Market\s page',
                 style: TextStyle(color: Color(0xffffffff)),
               ),
               backgroundColor: Colors.blue[300],

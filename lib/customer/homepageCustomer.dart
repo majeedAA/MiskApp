@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:miskapp/customer/processCus/listOfMarket.dart';
+import 'package:miskapp/customer/search_bar.dart';
 import 'package:miskapp/module/item.dart';
 import 'package:miskapp/module/user.dart';
 import 'package:miskapp/service/database.dart';
@@ -37,13 +38,23 @@ class _LoginState extends State<Login> {
                   onPressed: () {
                     _getCurruntLocation(user.uid);
                   },
-                )
+                ),
+                IconButton(
+                    icon: Icon(Icons.search),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (BuildContext context) =>
+                                SearchBarCustomer()),
+                      );
+                    }),
               ],
               title: Text(
-                'MISK Customer Login',
+                'Pick a market',
                 style: TextStyle(color: Color(0xffffffff)),
               ),
-              backgroundColor: Color(0xffbabbbb),
+              backgroundColor: Color(0xff4a6fa5),
             ),
             body: ListOfMarket(),
           );

@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:miskapp/module/item.dart';
 import 'package:miskapp/service/database.dart';
 
-class CustomerTile extends StatelessWidget {
-  final Item customer;
-  CustomerTile({this.customer});
+class DriverTileForAdmin extends StatelessWidget {
+  final Item driver;
+  DriverTileForAdmin({this.driver});
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: customer.isActive ? Colors.green[100] : Colors.red[100],
+      color: driver.isActive ? Colors.green[200] : Colors.red[200],
       margin: const EdgeInsets.only(top: 10.0),
       child: Column(
         children: [
@@ -18,7 +18,7 @@ class CustomerTile extends StatelessWidget {
               onPressed: () async {
                 await Firestore.instance
                     .collection('users')
-                    .document(customer.id)
+                    .document(driver.id)
                     .delete();
               },
               icon: Icon(Icons.remove_circle_outline_outlined),
@@ -30,14 +30,14 @@ class CustomerTile extends StatelessWidget {
                 child: SizedBox(
                   width: 300,
                   height: 3000,
-                  child: customer.image.isEmpty
+                  child: driver.image.isEmpty
                       ? Container()
-                      : Image.network(customer.image ?? ''),
+                      : Image.network(driver.image ?? ''),
                 ),
               ),
             ),
-            title: Text(customer.name),
-            subtitle: Text('Phone is ${customer.phone} \n${customer.email}'),
+            title: Text(driver.name),
+            subtitle: Text('Phone is ${driver.phone} \n${driver.email}'),
           ),
           Container(
             child: Row(
@@ -46,7 +46,7 @@ class CustomerTile extends StatelessWidget {
                   child: FlatButton.icon(
                       onPressed: () async {
                         await DatabaseService()
-                            .updateUserActive(false, customer.id);
+                            .updateUserActive(false, driver.id);
                       },
                       icon: Icon(Icons.remove),
                       label: Text('Freeze')),
@@ -55,7 +55,7 @@ class CustomerTile extends StatelessWidget {
                   child: FlatButton.icon(
                       onPressed: () async {
                         await DatabaseService()
-                            .updateUserActive(true, customer.id);
+                            .updateUserActive(true, driver.id);
                       },
                       icon: Icon(Icons.done),
                       label: Text('Activate')),

@@ -23,7 +23,7 @@ class _CustomerDitilsState extends State<CustomerDitils> {
             title: Text('End Order'),
             content: SingleChildScrollView(
               child: ListBody(
-                children: [Text('are you sure for End the order?')],
+                children: [Text('are you sure you want to end the order?')],
               ),
             ),
             actions: [

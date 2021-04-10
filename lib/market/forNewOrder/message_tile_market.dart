@@ -17,8 +17,6 @@ class _MessageTileMarketState extends State<MessageTileMarket> {
     return Container(
       padding: EdgeInsets.all(1),
       margin: EdgeInsets.symmetric(horizontal: 10, vertical: 3),
-      // height: 10,
-
       child: Container(
         margin: EdgeInsets.all(5),
         child: Text(

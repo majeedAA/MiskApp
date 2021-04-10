@@ -12,9 +12,9 @@ class Cart extends StatefulWidget {
 
 class _CartState extends State<Cart> {
   final List<String> pays = [
-    'cash',
+    'Cash',
     'mada',
-    'appel Pay',
+    'Apple Pay',
     'Visa',
   ];
   dynamic total = 0;

@@ -16,7 +16,7 @@ class ItemOfMarket extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           title: Text(
-            'MISK Item Of Market',
+            'Market\'s Items',
             style: TextStyle(color: Color(0xffffffff)),
           ),
           backgroundColor: Color(0xffbabbbb),

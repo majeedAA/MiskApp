@@ -6,6 +6,7 @@ import 'package:miskapp/module/new_order.dart';
 import 'package:miskapp/module/user.dart';
 import 'package:miskapp/service/database.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class NewOrderDriverTile extends StatefulWidget {
   final NewOrder order;
@@ -102,8 +103,13 @@ class _NewOrderDriverTileState extends State<NewOrderDriverTile> {
               children: [
                 FlatButton.icon(
                     onPressed: () async {
-                      // await DatabaseService().updateAcceptOfOrder(
-                      //     widget.order.idOfOrder, widget.order.accept);
+                      var mapSchema =
+                          'https://www.google.com/maps/search/?api=1&query=${market.latitude},${market.longitude}';
+                      if (await canLaunch(mapSchema)) {
+                        await launch(mapSchema);
+                      } else {
+                        throw 'Could not launch $mapSchema';
+                      }
                     },
                     icon: Icon(
                       Icons.location_on,
@@ -115,8 +121,13 @@ class _NewOrderDriverTileState extends State<NewOrderDriverTile> {
                 ),
                 FlatButton.icon(
                     onPressed: () async {
-                      // await DatabaseService().updateStateOfOrder(
-                      //     widget.order.idOfOrder, widget.order.state);
+                      var mapSchema =
+                          'https://www.google.com/maps/search/?api=1&query=${customer.latitude},${customer.longitude}';
+                      if (await canLaunch(mapSchema)) {
+                        await launch(mapSchema);
+                      } else {
+                        throw 'Could not launch $mapSchema';
+                      }
                     },
                     icon: Icon(Icons.location_on_outlined,
                         color: Colors.cyan[600]),

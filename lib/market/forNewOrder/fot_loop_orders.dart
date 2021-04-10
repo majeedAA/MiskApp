@@ -12,7 +12,6 @@ class ForLoopOrders extends StatefulWidget {
 class _ForLoopOrdersState extends State<ForLoopOrders> {
   @override
   Widget build(BuildContext context) {
-    // print(widget.order.allOrder);
     final double y = widget.order.allOrder.length / 4;
 
     return ListView(
@@ -28,7 +27,6 @@ class _ForLoopOrdersState extends State<ForLoopOrders> {
                 'Item: ${widget.order.allOrder[index]}\nQuantity( ${widget.order.allOrder[index + 6]} )\nTotal price( ${widget.order.allOrder[index + 9]} )',
                 style: TextStyle(
                   fontSize: 15,
-                  // fontWeight: FontWeight.,
                 ),
               ),
             ),

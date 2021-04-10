@@ -44,7 +44,7 @@ class _OrdersState extends State<Orders> {
             )
           ],
           title: Text(
-            'MISK Orders market',
+            'Menu',
             style: TextStyle(color: Color(0xffffffff)),
           ),
           backgroundColor: Color(0xffbabbbb),

@@ -25,11 +25,20 @@ class MarketTileOfAdmin extends StatelessWidget {
               label: Text('remove!'),
             ),
             leading: CircleAvatar(
-              radius: 25.0,
-              backgroundColor: Colors.green[100],
+              radius: 25,
+              child: ClipOval(
+                child: SizedBox(
+                  width: 300,
+                  height: 3000,
+                  child: market.image.isEmpty
+                      ? Container()
+                      : Image.network(market.image ?? ''),
+                ),
+              ),
             ),
             title: Text(market.name),
-            subtitle: Text('Phone is ${market.phone} \n${market.sity} City'),
+            subtitle: Text(
+                'Phone is ${market.phone} \n${market.sity} City\n${market.email}'),
           ),
           Container(
             child: Row(
@@ -41,7 +50,7 @@ class MarketTileOfAdmin extends StatelessWidget {
                             .updateUserActive(false, market.id);
                       },
                       icon: Icon(Icons.remove),
-                      label: Text('Stope')),
+                      label: Text('Freeze')),
                 ),
                 Expanded(
                   child: FlatButton.icon(
@@ -50,7 +59,7 @@ class MarketTileOfAdmin extends StatelessWidget {
                             .updateUserActive(true, market.id);
                       },
                       icon: Icon(Icons.done),
-                      label: Text('acctive')),
+                      label: Text('Activate')),
                 )
               ],
             ),

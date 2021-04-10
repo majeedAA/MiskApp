@@ -69,7 +69,7 @@ class _RegesterState extends State<Regester> {
                         EdgeInsets.symmetric(horizontal: 7.0, vertical: 7.0),
                     child: TextFormField(
                       validator: (val) =>
-                          val.isEmpty ? 'Enter correct an email' : null,
+                          val.isEmpty ? 'Enter a correct email' : null,
                       onChanged: (val) {
                         setState(() => name = val);
                       },
@@ -105,7 +105,7 @@ class _RegesterState extends State<Regester> {
                       validator: (val) =>
                           !val.contains(("gmail")) || !val.contains(("hotmail"))
                               ? null
-                              : 'Enter correct an email',
+                              : 'Enter a correct email',
                       onChanged: (val) {
                         setState(() => email = val);
                       },
@@ -138,7 +138,7 @@ class _RegesterState extends State<Regester> {
                         EdgeInsets.symmetric(horizontal: 7.0, vertical: 7.0),
                     child: TextFormField(
                       validator: (val) =>
-                          val.isEmpty ? 'Enter correct an phone' : null,
+                          val.isEmpty ? 'Enter a correct phone' : null,
                       onChanged: (val) {
                         setState(() => phone = int.parse(val));
                       },
@@ -279,9 +279,11 @@ class _RegesterState extends State<Regester> {
                       ],
                     ),
                   ),
-                  Text(
-                    error,
-                    style: TextStyle(color: Colors.red, fontSize: 14.0),
+                  Center(
+                    child: Text(
+                      error,
+                      style: TextStyle(color: Colors.red, fontSize: 14.0),
+                    ),
                   )
                 ],
               ),

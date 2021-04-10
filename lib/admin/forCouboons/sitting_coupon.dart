@@ -33,7 +33,7 @@ class _SittingOfCouponState extends State<SittingOfCoupon> {
             cursorColor: Colors.black,
             decoration: InputDecoration(
               border: OutlineInputBorder(),
-              labelText: 'set name to new couboon:',
+              labelText: 'set a name for the coupon:',
             ),
             onChanged: (val) {
               nameOfCouboon = val;
@@ -48,7 +48,7 @@ class _SittingOfCouponState extends State<SittingOfCoupon> {
             cursorColor: Colors.black,
             decoration: InputDecoration(
               border: OutlineInputBorder(),
-              labelText: 'How miny:',
+              labelText: 'Discount amount:',
             ),
             keyboardType: TextInputType.numberWithOptions(decimal: true),
             inputFormatters: <TextInputFormatter>[
@@ -62,7 +62,7 @@ class _SittingOfCouponState extends State<SittingOfCoupon> {
           RaisedButton(
               color: Color(0xff515c5e),
               child: Text(
-                'Add couboon',
+                'Add coupon',
                 style: TextStyle(color: Colors.white),
               ),
               onPressed: () async {

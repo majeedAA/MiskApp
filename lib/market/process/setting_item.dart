@@ -13,7 +13,7 @@ class _SettingsItemState extends State<SettingsItem> {
   final _formKey = GlobalKey<FormState>();
 
   String _currentName;
-  String _currentCaticury;
+  String _currentCategory;
   double _currentPrice;
   String _currentUnit;
 
@@ -25,14 +25,12 @@ class _SettingsItemState extends State<SettingsItem> {
       child: Column(
         children: <Widget>[
           Text(
-            'Update your Menu settings.',
+            'Add item',
             style: TextStyle(fontSize: 18.0),
           ),
           SizedBox(height: 20.0),
           TextFormField(
-            // initialValue: menuData.name,
             decoration: InputDecoration(
-              //  border: OutlineInputBorder(),
               labelText: 'Name',
             ),
             validator: (val) => val.isEmpty ? 'Please enter a name' : null,
@@ -40,27 +38,20 @@ class _SettingsItemState extends State<SettingsItem> {
           ),
           SizedBox(height: 10.0),
           TextFormField(
-            validator: (val) => val.isEmpty ? 'Enter Caticury' : null,
-            //initialValue: menuData.caticury,
+            validator: (val) => val.isEmpty ? 'Enter Category' : null,
             decoration: InputDecoration(
-              labelText: 'Caticury',
+              labelText: 'Category',
             ),
             onChanged: (val) => setState(() {
-              _currentCaticury = val;
+              _currentCategory = val;
             }),
           ),
           SizedBox(height: 10.0),
           TextFormField(
             validator: (val) => val.isEmpty ? 'Enter Unit' : null,
-            //initialValue: menuData.unet,
             decoration: InputDecoration(
               labelText: 'Unit',
             ),
-            // keyboardType:
-            //     TextInputType.numberWithOptions(decimal: true),
-            // inputFormatters: <TextInputFormatter>[
-            //   FilteringTextInputFormatter.digitsOnly
-            // ],
             onChanged: (val) => setState(() {
               _currentUnit = val;
             }),
@@ -68,7 +59,6 @@ class _SettingsItemState extends State<SettingsItem> {
           SizedBox(height: 10.0),
           TextFormField(
             validator: (val) => val.isEmpty ? 'Enter Price' : null,
-            // initialValue: menuData.price.toString(),
             decoration: InputDecoration(
               labelText: 'Price',
             ),
@@ -90,15 +80,8 @@ class _SettingsItemState extends State<SettingsItem> {
                     _currentName ?? '',
                     _currentUnit ?? '',
                     _currentPrice ?? 0.0,
-                    _currentCaticury ?? '',
+                    _currentCategory ?? '',
                   );
-
-                  // await DatabaseService(uid: user.uid).updatemenuData(
-                  //   _currentName ?? snapshot.data.name,
-                  //   _currentUnit ?? snapshot.data.unet,
-                  //   _currentPrice ?? snapshot.data.price,
-                  //   _currentCaticury ?? snapshot.data.caticury,
-                  //       );
                   Navigator.pop(context);
                 } else {
                   return Loading();
