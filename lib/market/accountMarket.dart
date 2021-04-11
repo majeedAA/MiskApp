@@ -23,7 +23,7 @@ class AccountMarket extends StatelessWidget {
       value: DatabaseService().items,
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.lightBlue[200],
+          backgroundColor: Color(0xff4a6fa5),
           actions: <Widget>[
             FlatButton.icon(
               icon: Icon(Icons.settings),

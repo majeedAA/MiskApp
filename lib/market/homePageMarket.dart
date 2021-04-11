@@ -43,13 +43,13 @@ class _MarketState extends State<Market> {
                   onPressed: () {
                     _getCurruntLocation(user.uid);
                   },
-                )
+                ),
               ],
               title: Text(
                 'New Orders',
                 style: TextStyle(color: Color(0xffffffff)),
               ),
-              backgroundColor: Color(0xffbabbbb),
+              backgroundColor: Color(0xff4a6fa5),
             ),
             body: ListOfOrdersMarket(),
           );

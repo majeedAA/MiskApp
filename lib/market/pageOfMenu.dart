@@ -47,7 +47,7 @@ class _OrdersState extends State<Orders> {
             'Menu',
             style: TextStyle(color: Color(0xffffffff)),
           ),
-          backgroundColor: Color(0xffbabbbb),
+          backgroundColor: Color(0xff4a6fa5),
         ),
         body: ListOfItem(),
       ),

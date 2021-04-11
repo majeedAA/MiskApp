@@ -28,7 +28,7 @@ class _NotificationState extends State<Notification> {
                 'Past orders',
                 style: TextStyle(color: Color(0xffffffff)),
               ),
-              backgroundColor: Color(0xffbabbbb),
+              backgroundColor: Color(0xff4a6fa5),
             ),
             body: ListOfLastOrderMarket(),
           );

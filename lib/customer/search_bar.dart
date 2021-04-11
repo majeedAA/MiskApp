@@ -44,6 +44,7 @@ class _SearchBarCustomerState extends State<SearchBarCustomer> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: new AppBar(
+          backgroundColor: Color(0xff4a6fa5),
           title: Text('search'),
         ),
         body: ListView(children: <Widget>[

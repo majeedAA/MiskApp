@@ -22,7 +22,7 @@ class PastOrder extends StatelessWidget {
                   'Past order',
                   style: TextStyle(color: Color(0xffffffff)),
                 ),
-                backgroundColor: Colors.blue[300],
+                backgroundColor: Color(0xff4a6fa5),
               ),
               backgroundColor: Colors.blue[50],
               body: ListOfPastOrderDriver(),

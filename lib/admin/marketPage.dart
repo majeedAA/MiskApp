@@ -17,7 +17,7 @@ class MarketPageOfAdmin extends StatelessWidget {
                 'Market\s page',
                 style: TextStyle(color: Color(0xffffffff)),
               ),
-              backgroundColor: Colors.blue[300],
+              backgroundColor: Color(0xff4a6fa5),
             ),
             backgroundColor: Colors.blue[50],
             body: ListOfMarketOfAdmin(),
