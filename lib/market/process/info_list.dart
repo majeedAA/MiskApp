@@ -18,7 +18,7 @@ class _ItemListState extends State<ItemList> {
   File _image;
   String theImage = '';
   String defoltImage =
-      'https://cdn.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png';
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRISxBTQ88B9PvlreCwRY0_wqZK7y4XoG4zIQ&usqp=CAU';
 
   @override
   Widget build(BuildContext context) {
@@ -89,6 +89,7 @@ class _ItemListState extends State<ItemList> {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: <Widget>[
                                 new CircleAvatar(
+                                  backgroundColor: Colors.white,
                                   radius: _height / 10,
                                   child: ClipOval(
                                     child: SizedBox(

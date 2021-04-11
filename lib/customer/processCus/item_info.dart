@@ -31,6 +31,7 @@ class ItemInfo extends StatelessWidget {
           margin: EdgeInsets.fromLTRB(20.0, 6.0, 20.0, 0.0),
           child: ListTile(
             leading: CircleAvatar(
+              backgroundColor: Colors.white,
               radius: 25,
               child: ClipOval(
                 child: SizedBox(
@@ -43,7 +44,7 @@ class ItemInfo extends StatelessWidget {
               ),
             ),
             title: Text(menu.name),
-            subtitle: Text('Takes ${menu.price} Price\n1 ${menu.unit}'),
+            subtitle: Text('Takes ${menu.price} Price\n1- ${menu.unit}'),
           ),
         ),
       ),

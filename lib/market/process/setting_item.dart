@@ -22,7 +22,7 @@ class _SettingsItemState extends State<SettingsItem> {
     final user = Provider.of<User>(context);
     return Form(
       key: _formKey,
-      child: Column(
+      child: ListView(
         children: <Widget>[
           Text(
             'Add item',

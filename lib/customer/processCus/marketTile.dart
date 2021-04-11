@@ -39,6 +39,7 @@ class MarketTile extends StatelessWidget {
           margin: EdgeInsets.fromLTRB(20.0, 6.0, 20.0, 0.0),
           child: ListTile(
             leading: CircleAvatar(
+              backgroundColor: Colors.white,
               radius: 25,
               child: ClipOval(
                 child: SizedBox(

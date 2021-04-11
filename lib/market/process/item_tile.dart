@@ -25,9 +25,9 @@ class MenuTile extends StatelessWidget {
   getUsers(Menu menu) {
     userRef.getDocuments().then((QuerySnapshot snapshot) {
       snapshot.documents.forEach((element) {
-        if (menu.name == element.data.values.elementAt(3) &&
-            menu.price == element.data.values.elementAt(2) &&
-            menu.caticury == element.data.values.elementAt(1)) {
+        if (menu.name == element.data.values.elementAt(4) &&
+            menu.price == element.data.values.elementAt(3) &&
+            menu.caticury == element.data.values.elementAt(2)) {
           idItem = element.documentID;
         }
       });
@@ -76,7 +76,7 @@ class MenuTile extends StatelessWidget {
               ),
               leading: CircleAvatar(
                 radius: 25.0,
-                backgroundColor: Colors.brown[100],
+                backgroundColor: Colors.white,
                 child: ClipOval(
                   child: SizedBox(
                     width: 300,
@@ -88,7 +88,7 @@ class MenuTile extends StatelessWidget {
                 ),
               ),
               title: Text(menu.name),
-              subtitle: Text('Takes ${menu.price} Price'),
+              subtitle: Text('${menu.price} Price\n${menu.unit}'),
             ),
             FlatButton.icon(
               padding: EdgeInsets.only(right: 250),
