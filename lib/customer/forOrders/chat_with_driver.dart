@@ -149,7 +149,7 @@ class _CustomerChatWithDriverState extends State<CustomerChatWithDriver> {
                       backgroundColor: Colors.cyan[200],
                     ),
                     body: SafeArea(
-                      child: Column(
+                      child: ListView(
                         children: <Widget>[
                           Container(
                             height: MediaQuery.of(context).size.height / 1.215,

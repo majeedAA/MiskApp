@@ -32,7 +32,7 @@ class _ForgetState extends State<Forget> {
           'MISK',
           style: TextStyle(color: Color(0xffffffff)),
         ),
-        backgroundColor: Color(0xffbabbbb),
+        backgroundColor: Colors.lightBlue[700],
       ),
       body: Container(
         child: Column(
@@ -47,7 +47,7 @@ class _ForgetState extends State<Forget> {
                 obscureText: false,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
-                  labelText: 'Emsil',
+                  labelText: 'Email',
                 ),
                 onChanged: (val) {
                   _email = val;
@@ -63,7 +63,7 @@ class _ForgetState extends State<Forget> {
                           EdgeInsets.symmetric(horizontal: 7.0, vertical: 10),
                       child: new FloatingActionButton(
                         heroTag: "btn1",
-                        backgroundColor: Color(0xff515c5e),
+                        backgroundColor: Color(0xff4a6fa5),
                         child: Text("Send"),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(5.0),

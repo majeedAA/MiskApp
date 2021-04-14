@@ -41,7 +41,7 @@ class _SettingsFormState extends State<SettingsForm> {
             UserData userData = snapshot.data;
             return Form(
               key: _formKey,
-              child: Column(
+              child: ListView(
                 children: <Widget>[
                   Text(
                     'Update your Account settings.',

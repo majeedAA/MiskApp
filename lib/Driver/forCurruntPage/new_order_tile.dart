@@ -17,7 +17,13 @@ class NewOrderDriverTile extends StatefulWidget {
 
 class _NewOrderDriverTileState extends State<NewOrderDriverTile> {
   String cusrmerID;
-  String nemeOfMarket;
+  String marketName;
+  double customerLati;
+  double customerLong;
+  double marketLati;
+  double marketLong;
+  double driverLati;
+  double driverLong;
 
   @override
   Widget build(BuildContext context) {
@@ -25,35 +31,39 @@ class _NewOrderDriverTileState extends State<NewOrderDriverTile> {
     final users = Provider.of<List<Item>>(context) ?? [];
     Item customer;
     Item market;
-    Item driver;
+    // Item driver;
 
     for (var i = 0; i < users.length; i++) {
       if (users[i].id == user.uid) {
-        driver = users[i];
+        //   driver = users[i];
+        driverLati = users[i].latitude;
+        driverLong = users[i].longitude;
       }
 
       if (users[i].id == widget.order.marketId) {
         market = users[i];
+        marketLati = users[i].latitude;
+        marketLong = users[i].longitude;
+        marketName = users[i].name;
       }
       if (users[i].id == widget.order.customerId) {
         customer = users[i];
+        customerLati = users[i].latitude;
+        customerLong = users[i].longitude;
       }
     }
     double dinsToMarket = 0;
 
-    dinsToMarket = (((driver.latitude - market.latitude) *
-            (driver.latitude - market.latitude)) +
-        ((driver.longitude - market.longitude) *
-            (driver.longitude - market.longitude)));
+    dinsToMarket = (((driverLati - marketLati) * (driverLati - marketLati)) +
+        ((driverLong - marketLong) * (driverLong - marketLong)));
 
     dinsToMarket = sqrt(dinsToMarket);
     dinsToMarket = (dinsToMarket * 100);
     String dinsToMa = dinsToMarket.toStringAsFixed(1);
 
-    dinsToMarket = (((customer.latitude - market.latitude) *
-            (customer.latitude - market.latitude)) +
-        ((customer.longitude - market.longitude) *
-            (customer.longitude - market.longitude)));
+    dinsToMarket =
+        (((customerLati - marketLati) * (customerLati - marketLati)) +
+            ((customerLong - marketLong) * (customerLong - marketLong)));
 
     dinsToMarket = sqrt(dinsToMarket);
     dinsToMarket = (dinsToMarket * 100);
@@ -96,7 +106,7 @@ class _NewOrderDriverTileState extends State<NewOrderDriverTile> {
                   );
                 },
               ),
-              title: Text('New order from ${market.name}'),
+              title: Text('New order from $marketName'),
               subtitle: Text('$dinsToMa Km  + $dinsToCus Km\n $total SAR'),
             ),
             Row(
@@ -104,7 +114,7 @@ class _NewOrderDriverTileState extends State<NewOrderDriverTile> {
                 FlatButton.icon(
                     onPressed: () async {
                       var mapSchema =
-                          'https://www.google.com/maps/search/?api=1&query=${market.latitude},${market.longitude}';
+                          'https://www.google.com/maps/search/?api=1&query=$marketLati,$marketLong';
                       if (await canLaunch(mapSchema)) {
                         await launch(mapSchema);
                       } else {
@@ -122,7 +132,7 @@ class _NewOrderDriverTileState extends State<NewOrderDriverTile> {
                 FlatButton.icon(
                     onPressed: () async {
                       var mapSchema =
-                          'https://www.google.com/maps/search/?api=1&query=${customer.latitude},${customer.longitude}';
+                          'https://www.google.com/maps/search/?api=1&query=$customerLati,$customerLong';
                       if (await canLaunch(mapSchema)) {
                         await launch(mapSchema);
                       } else {

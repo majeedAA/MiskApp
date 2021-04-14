@@ -12,7 +12,7 @@ class WaitPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             SizedBox(
-              height: 20,
+              height: 40,
             ),
             Container(
               margin: EdgeInsets.all(10),

@@ -160,7 +160,7 @@ class _CustomerChatWithMarketState extends State<CustomerChatWithMarket> {
                             ),
                           ), //one
                           Container(
-                            height: 65.5,
+                            height: 64.3,
                             child: Row(
                               children: <Widget>[
                                 Expanded(

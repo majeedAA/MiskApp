@@ -2,9 +2,23 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:miskapp/service/search.dart';
 
+void main() => runApp(new MyApp());
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return new MaterialApp(
+      theme: new ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: new SearchBarCustomer(),
+    );
+  }
+}
+
 class SearchBarCustomer extends StatefulWidget {
   @override
-  _SearchBarCustomerState createState() => _SearchBarCustomerState();
+  _SearchBarCustomerState createState() => new _SearchBarCustomerState();
 }
 
 class _SearchBarCustomerState extends State<SearchBarCustomer> {
@@ -42,9 +56,8 @@ class _SearchBarCustomerState extends State<SearchBarCustomer> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return new Scaffold(
         appBar: new AppBar(
-          backgroundColor: Color(0xff4a6fa5),
           title: Text('search'),
         ),
         body: ListView(children: <Widget>[

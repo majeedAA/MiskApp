@@ -21,8 +21,6 @@ class Wapper extends StatelessWidget {
             if (snapshot.hasData) {
               UserData appUser = snapshot.data;
 
-              // return either the Home or Authenticate widget
-
               if (!appUser.isActive ?? false) {
                 return WaitPage();
               } else if (appUser.isAdmin ?? false) {
@@ -42,7 +40,5 @@ class Wapper extends StatelessWidget {
     } else {
       return Authenticate();
     }
-
-    //return LogInMarket();
   }
 }

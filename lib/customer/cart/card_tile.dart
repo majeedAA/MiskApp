@@ -25,7 +25,6 @@ class CardCustomerTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     getUsers(card);
-
     return Padding(
       padding: const EdgeInsets.only(top: 8.0),
       child: Card(
@@ -41,16 +40,12 @@ class CardCustomerTile extends StatelessWidget {
             icon: Icon(Icons.remove_circle_outline_outlined),
             label: Text(''),
           ),
-          leading: CircleAvatar(
-            radius: 25.0,
-            backgroundColor: Colors.brown[100],
-          ),
           title: Text(card.nameOfItem),
-          subtitle: Text('price: ' +
+          subtitle: Text(' price: ' +
               card.price.toString() +
-              ' \nQuantity: ' +
+              ' \n Quantity: ' +
               card.quantity.toString() +
-              ' \nTotal price: ' +
+              ' \n Total price: ' +
               card.totalprice.toString() +
               ' SAR '),
         ),

@@ -3,7 +3,6 @@ import 'package:miskapp/module/item.dart';
 import 'package:miskapp/module/new_order.dart';
 import 'package:miskapp/service/database.dart';
 import 'package:provider/provider.dart';
-// import 'package:url_launcher/url_launcher.dart';
 
 class CustomerDitils extends StatefulWidget {
   final NewOrder order;

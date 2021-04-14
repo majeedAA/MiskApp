@@ -41,7 +41,7 @@ class _PillState extends State<Pill> {
     List<Cardd> itemOfCustomer = [];
     List<dynamic> allItem = [];
 
-    dynamic total = 0;
+    double total = 0;
     final user = Provider.of<User>(context);
     final card = Provider.of<List<Cardd>>(context) ?? [];
 
@@ -89,8 +89,10 @@ class _PillState extends State<Pill> {
       }
     }
 
-    var totalCost = MarketTile.dins;
-    totalCost = totalCost < 5 ? totalCost = 15 : totalCost = totalCost * 3;
+    double dins = MarketTile.dins;
+    double totalCost = 0;
+
+    totalCost = dins <= 5 ? totalCost = 15 : totalCost = dins * 3;
     totalCost = totalCost.ceil().toDouble();
 
     driveIt ? total = total + totalCost : total = total + 5;
@@ -103,122 +105,120 @@ class _PillState extends State<Pill> {
           Container(
             padding: EdgeInsets.all(7),
             color: Color(0xffccdbfd),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[
-                TextFormField(
-                  initialValue: '',
-                  cursorColor: Colors.black,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: '  any Notes?',
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: <Widget>[
+                  TextFormField(
+                    initialValue: '',
+                    cursorColor: Colors.black,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: '  any Notes?',
+                    ),
+                    onChanged: (val) {
+                      setState(() {
+                        notis = val;
+                      });
+                    },
                   ),
-                  onChanged: (val) {
-                    setState(() {
-                      notis = val;
-                    });
-                  },
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  children: [
-                    Text(
-                      driveIt ? 'total with Delivery: ' : 'total with Pickup: ',
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                    ),
-                    Text(
-                      '$total',
-                      style: TextStyle(fontSize: 20),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                DropdownButtonFormField(
-                  value: 'Cash',
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'Pay by',
+                  SizedBox(
+                    height: 20,
                   ),
-                  items: pays.map((pays) {
-                    return DropdownMenuItem(
-                      value: pays,
-                      child: Text(pays),
-                    );
-                  }).toList(),
-                  onChanged: (val) => setState(() => pay = val),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                TextFormField(
-                  validator: (val) => val.isEmpty ? val = 'know' : null,
-                  initialValue: '',
-                  cursorColor: Colors.black,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'Time to take it',
-                  ),
-                  onChanged: (val) => setState(() => time = val),
-                ),
-                Row(
-                  children: [
-                    SizedBox(
-                      width: 105,
-                    ),
-                    FlatButton.icon(
-                        onPressed: () {
-                          setState(() {
-                            driveIt = true;
-                          });
-                        },
-                        icon: Icon(
-                          Icons.drive_eta,
-                          color: driveIt == true ? ava : non,
-                        ),
-                        label: Text('Drive')),
-                    SizedBox(
-                      width: 20,
-                    ),
-                    FlatButton.icon(
-                        onPressed: () {
-                          setState(() {
-                            driveIt = false;
-                          });
-                        },
-                        icon: Icon(
-                          Icons.shopping_bag_sharp,
-                          color: driveIt == false ? ava : non,
-                        ),
-                        label: Text('Pickup')),
-                  ],
-                ),
-                Container(
-                  margin: EdgeInsets.symmetric(horizontal: 70, vertical: 10),
-                  child: FloatingActionButton(
-                      backgroundColor: Colors.indigo[700],
-                      child: Text("Send Cart"),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0),
+                  Row(
+                    children: [
+                      Text(
+                        driveIt
+                            ? 'total with Delivery: '
+                            : 'total with Pickup: ',
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
                       ),
-                      onPressed: () async {
-                        await DatabaseService(uid: user.uid).updateNewOrderData(
-                            allItem,
-                            user.uid,
-                            idMarket,
-                            pay,
-                            notis,
-                            time,
-                            driveIt,
-                            total);
-                        deletItem();
-                      }),
-                ),
-              ],
+                      Text(
+                        total.toStringAsFixed(2),
+                        style: TextStyle(fontSize: 20),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  DropdownButtonFormField(
+                    value: 'Cash',
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: 'Pay by',
+                    ),
+                    items: pays.map((pays) {
+                      return DropdownMenuItem(
+                        value: pays,
+                        child: Text(pays),
+                      );
+                    }).toList(),
+                    onChanged: (val) => setState(() => pay = val),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  TextFormField(
+                    validator: (val) => val.isEmpty ? val = 'know' : null,
+                    initialValue: '',
+                    cursorColor: Colors.black,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: 'Time to take it',
+                    ),
+                    onChanged: (val) => setState(() => time = val),
+                  ),
+                  Row(
+                    children: [
+                      SizedBox(
+                        width: 105,
+                      ),
+                      FlatButton.icon(
+                          onPressed: () {
+                            setState(() {
+                              driveIt = true;
+                            });
+                          },
+                          icon: Icon(
+                            Icons.drive_eta,
+                            color: driveIt == true ? ava : non,
+                          ),
+                          label: Text('Drive')),
+                      SizedBox(
+                        width: 20,
+                      ),
+                      FlatButton.icon(
+                          onPressed: () {
+                            setState(() {
+                              driveIt = false;
+                            });
+                          },
+                          icon: Icon(
+                            Icons.shopping_bag_sharp,
+                            color: driveIt == false ? ava : non,
+                          ),
+                          label: Text('Pickup')),
+                    ],
+                  ),
+                  Container(
+                    margin: EdgeInsets.symmetric(horizontal: 70, vertical: 10),
+                    child: FloatingActionButton(
+                        backgroundColor: Colors.indigo[700],
+                        child: Text("Send Cart"),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        onPressed: () async {
+                          await DatabaseService(uid: user.uid)
+                              .updateNewOrderData(allItem, user.uid, idMarket,
+                                  pay, notis, time, driveIt, total);
+                          deletItem();
+                        }),
+                  ),
+                ],
+              ),
             ),
           ),
         ],

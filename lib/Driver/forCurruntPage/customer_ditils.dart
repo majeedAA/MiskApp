@@ -68,32 +68,32 @@ class _CustomerDitilsDriverState extends State<CustomerDitilsDriver> {
       child: Expanded(
         child: Row(
           children: [
-            // SizedBox(
-            //   width: 10,
-            // ),
+            SizedBox(
+              width: 10,
+            ),
             Icon(
               Icons.account_circle_outlined,
               color: Colors.blue,
             ),
-            // SizedBox(
-            //   width: 10,
-            // ),
+            SizedBox(
+              width: 10,
+            ),
             Text(name),
-            // SizedBox(
-            //   width: 40,
-            // ),
+            SizedBox(
+              width: 40,
+            ),
             Icon(Icons.phone),
-            // SizedBox(
-            //   width: 10,
-            // ),
+            SizedBox(
+              width: 10,
+            ),
             Text(phone.toString()),
-            // SizedBox(
-            //   width: 25,
-            // ),
+            SizedBox(
+              width: 25,
+            ),
             Text('|'),
-            // SizedBox(
-            //   width: 13,
-            // ),
+            SizedBox(
+              width: 13,
+            ),
             GestureDetector(
               child: Text(
                 'Take it',
@@ -105,13 +105,13 @@ class _CustomerDitilsDriverState extends State<CustomerDitilsDriver> {
                     widget.order.idOfOrder, 'tikeItDriver', true);
               },
             ),
-            // SizedBox(
-            //   width: 20,
-            // ),
+            SizedBox(
+              width: 20,
+            ),
             Text('|'),
-            // SizedBox(
-            //   width: 20,
-            // ),
+            SizedBox(
+              width: 20,
+            ),
             GestureDetector(
               child: Text(
                 'Done',

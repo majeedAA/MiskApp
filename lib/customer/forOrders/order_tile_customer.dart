@@ -70,7 +70,7 @@ class _OrdersOfCustomerState extends State<OrdersOfCustomer> {
                     : Colors.green[800]
                 : Colors.grey[700]
             : Colors.red[900],
-        height: 110,
+        height: 117,
         padding: const EdgeInsets.only(top: 6.0, bottom: 6),
         margin: EdgeInsets.only(bottom: 2, top: 5),
         child: Card(

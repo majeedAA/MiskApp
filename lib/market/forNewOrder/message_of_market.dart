@@ -47,7 +47,7 @@ class _MessageOfMarketState extends State<MessageOfMarket> {
                       child: Column(
                         children: <Widget>[
                           Container(
-                            height: MediaQuery.of(context).size.height / 1.215,
+                            height: MediaQuery.of(context).size.height / 1.225,
                             child: ListOfMessageMarket(
                               order: widget.order,
                             ),

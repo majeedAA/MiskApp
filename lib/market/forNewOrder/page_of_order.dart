@@ -122,14 +122,6 @@ class _PageOfOrderState extends State<PageOfOrder> {
                             ),
                             onPressed: () {
                               openrate();
-                              // Navigator.push(
-                              //   context,
-                              //   MaterialPageRoute(
-                              //       builder: (BuildContext context) =>
-                              //           MessageOfMarket(
-                              //             order: order,
-                              //           )),
-                              // );
                             }),
                         IconButton(
                             icon: Icon(Icons.message),
@@ -164,8 +156,7 @@ class _PageOfOrderState extends State<PageOfOrder> {
                           ),
                           Container(
                               color: Colors.deepPurple[50],
-                              height:
-                                  MediaQuery.of(context).size.height / 1.483,
+                              height: MediaQuery.of(context).size.height / 1.55,
                               child: ForLoopOrders(
                                 order: widget.order,
                               )),

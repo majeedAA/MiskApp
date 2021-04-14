@@ -31,6 +31,7 @@ class _PageOfOrderDriverState extends State<PageOfOrderDriver> {
 
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<User>(context);
     Future<void> openrate() async {
       return showDialog(
           context: context,
@@ -115,7 +116,49 @@ class _PageOfOrderDriverState extends State<PageOfOrderDriver> {
           });
     }
 
-    final user = Provider.of<User>(context);
+    Future<void> openCancel() async {
+      return showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text('CANCEL ORDER!!'),
+              content: SingleChildScrollView(
+                child: ListBody(
+                  children: [
+                    Text('Are you sure?'),
+                    Center(
+                        child: Text(
+                            'If the order is canceled, your account will be suspended')),
+                  ],
+                ),
+              ),
+              actions: [
+                FlatButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: Text('No')),
+                FlatButton(
+                  child: Text('yes'),
+                  onPressed: () async {
+                    print(rate);
+                    // if (widget.order.driveIt == false) {
+
+                    // }
+                    await DatabaseService().updateWhatOfOrder(
+                        widget.order.idOfOrder, 'tikeIt', false);
+                    await DatabaseService().updateWhatOfOrder(
+                        widget.order.idOfOrder, 'driverId', '');
+                    await DatabaseService().updateUserActive(false, user.uid);
+                    Navigator.pop(context);
+                  },
+                ),
+              ],
+            );
+          });
+    }
+
     return StreamProvider<List<Item>>.value(
       value: DatabaseService().items,
       child: StreamProvider<List<Chat>>.value(
@@ -127,6 +170,15 @@ class _PageOfOrderDriverState extends State<PageOfOrderDriver> {
                 child: Scaffold(
                   appBar: AppBar(
                     actions: [
+                      TextButton(
+                        onPressed: () {
+                          openCancel();
+                        },
+                        child: Text(
+                          'CANCEL',
+                          style: TextStyle(color: Colors.amber[900]),
+                        ),
+                      ),
                       IconButton(
                           icon: Icon(
                             Icons.star,
@@ -134,14 +186,6 @@ class _PageOfOrderDriverState extends State<PageOfOrderDriver> {
                           ),
                           onPressed: () {
                             openrate();
-                            // Navigator.push(
-                            //   context,
-                            //   MaterialPageRoute(
-                            //       builder: (BuildContext context) =>
-                            //           MessageOfMarket(
-                            //             order: order,
-                            //           )),
-                            // );
                           }),
                       IconButton(
                           icon: Icon(Icons.arrow_forward_ios_rounded),

@@ -45,7 +45,7 @@ class _State extends State<Home> {
                 'MISK',
                 style: TextStyle(color: Color(0xffffffff)),
               ),
-              backgroundColor: Color(0xffbabbbb),
+              backgroundColor: Colors.lightBlue[600],
             ),
             body: Form(
               key: _formKey,
@@ -100,7 +100,7 @@ class _State extends State<Home> {
                                 horizontal: 7.0, vertical: 10),
                             child: FloatingActionButton(
                                 //  heroTag: "btn1",
-                                backgroundColor: Color(0xff515c5e),
+                                backgroundColor: Color(0xff4a6fa5),
                                 child: Text(
                                   "LOGIN",
                                   style: TextStyle(color: Colors.white),
@@ -131,7 +131,7 @@ class _State extends State<Home> {
                                 horizontal: 7.0, vertical: 10),
                             child: new FloatingActionButton(
                               heroTag: "btn2",
-                              backgroundColor: Color(0xff515c5e),
+                              backgroundColor: Color(0xff4a6fa5),
                               child: Text("Forget Password"),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(5.0),
@@ -155,8 +155,8 @@ class _State extends State<Home> {
                     padding: EdgeInsets.all(10),
                     child: new FloatingActionButton(
                       heroTag: "btn3",
-                      backgroundColor: Color(0xff515c5e),
-                      child: Text("SingUp"),
+                      backgroundColor: Color(0xff4a6fa5),
+                      child: Text("Sign Up"),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(5.0),
                       ),
